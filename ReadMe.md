@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/nhentai-api?style=for-the-badge)](https://www.npmjs.com/package/nhentai-api)![node version](https://img.shields.io/node/v/nhentai-api?style=for-the-badge)
 
-Node.JS module for handling nhenta.net API.
+Node.JS module for handling nhentai.net API.
 
 Please refer the docs of source code to see main features, such as:
 * Classes instances for every type of data from API.
