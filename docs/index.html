@@ -61,9 +61,33 @@
     <section>
         <article class="readme"><h1>Node.JS implementation of nhentai.net's undocumented APIs.</h1>
 <p><a href="https://www.npmjs.com/package/nhentai-api"><img src="https://img.shields.io/npm/v/nhentai-api?style=for-the-badge" alt="npm version"></a><img src="https://img.shields.io/node/v/nhentai-api?style=for-the-badge" alt="node version"></p>
+<p>Node.JS module for handling nhenta.net API.</p>
+<p>Please refer the docs of source code to see main features, such as:</p>
+<ul>
+<li>Classes instances for every type of data from API.</li>
+<li>Return URLs for binary data (images).</li>
+<li>Easy proxy support by using custom Agent (like <a href="https://www.npmjs.com/package/https-proxy-agent">this one</a>).</li>
+</ul>
 <h2>Install</h2>
 <p>Install via npm:</p>
 <pre class="prettyprint source"><code>npm i nhentai-api
+</code></pre>
+<h2>Docs</h2>
+<p><a href="https://zekfad.github.io/nhentai-api/">Read the docs on GitHub pages.</a></p>
+<h2>Example</h2>
+<h3>CommonJS</h3>
+<pre class="prettyprint source lang-js"><code>const { API, } = require('nhentai-api');
+</code></pre>
+<h3>ES6</h3>
+<pre class="prettyprint source lang-js"><code>import { API, } from 'nhentai-api';
+</code></pre>
+<h3>Common</h3>
+<pre class="prettyprint source lang-js"><code>const api = new API();
+
+api.getBook(177013).then(book => {
+	api.getImageURL(book.cover);    // https://t.nhentai.net/galleries/987560/cover.jpg
+	api.getImageURL(book.pages[1]); // https://i.nhentai.net/galleries/987560/2.jpg
+});
 </code></pre></article>
     </section>
 
