@@ -4,6 +4,7 @@
 
 /**
  * Tag object from API.
+ * @global
  * @typedef {object} APITag
  * @property {number|string} id    Tag id.
  * @property {string}        type  Tag type.

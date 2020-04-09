@@ -130,6 +130,7 @@ get(type){let known;if("string"==typeof type)switch(type=type.toLowerCase()){cas
  */
 /**
  * Tag object from API.
+ * @global
  * @typedef {object} APITag
  * @property {number|string} id    Tag id.
  * @property {string}        type  Tag type.
@@ -398,7 +399,7 @@ constructor(options={}){let params=function processOptions({hosts:{api:api="nhen
    * @param {string} options.host Host.
    * @param {string} options.path Path.
    * @returns {Promise<object>} Parsed JSON.
-   */request(options){let{net:net,agent:agent}=this;return new Promise((resolve,reject)=>{Object.assign(options,{agent:agent,headers:{"User-Agent":`nhentai-api-client/3.0.0 Node.js/${process.versions.node}`}}),net.get(options,response=>{const{statusCode:statusCode}=response,contentType=response.headers["content-type"];let error;if(200!==statusCode?error=new Error(`Request failed with status code ${statusCode}`):/^application\/json/.test(contentType)||(error=new Error(`Invalid content-type - expected application/json but received ${contentType}`)),error)return response.resume(),void reject(error);response.setEncoding("utf8");let rawData="";response.on("data",chunk=>rawData+=chunk),response.on("end",()=>{try{resolve(JSON.parse(rawData))}catch(error){reject(error)}})}).on("error",error=>reject(error))})}
+   */request(options){let{net:net,agent:agent}=this;return new Promise((resolve,reject)=>{Object.assign(options,{agent:agent,headers:{"User-Agent":`nhentai-api-client/3.0.2 Node.js/${process.versions.node}`}}),net.get(options,response=>{const{statusCode:statusCode}=response,contentType=response.headers["content-type"];let error;if(200!==statusCode?error=new Error(`Request failed with status code ${statusCode}`):/^application\/json/.test(contentType)||(error=new Error(`Invalid content-type - expected application/json but received ${contentType}`)),error)return response.resume(),void reject(error);response.setEncoding("utf8");let rawData="";response.on("data",chunk=>rawData+=chunk),response.on("end",()=>{try{resolve(JSON.parse(rawData))}catch(error){reject(error)}})}).on("error",error=>reject(error))})}
 /**
    * Get API arguments.
    * This is internal method.
