@@ -39,3 +39,4 @@ test/
 **/.jsdoc*
 **/rollup.config.js
 **/.babelrc*
+**/.travis*
