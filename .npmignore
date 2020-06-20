@@ -35,6 +35,12 @@ bld/
 # Node
 node_modules/
 
-# Custom
-#dist/
-test/
+# Code coverage
+.nyc_output
+coverage/
+
+# Environment
+.env
+
+# Source
+src/
