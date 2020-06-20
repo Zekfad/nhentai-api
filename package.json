@@ -28,10 +28,11 @@
 	"repository": "github:Zekfad/nhentai-api",
 	"scripts": {
 		"lint": "eslint . --ext .js,.mjs",
-		"build": "rollup -c",
 		"dev": "rollup -c --watch --environment mode:dev",
 		"gendocs": "jsdoc --configure .jsdoc.json --verbose",
-		"test": "mocha"
+		"build": "rollup -c",
+		"test": "nyc --reporter=lcov mocha",
+		"coverage": "codecov"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.9.0",
@@ -41,11 +42,13 @@
 		"@rollup/plugin-json": "^4.0.2",
 		"@rollup/plugin-node-resolve": "^8.0.1",
 		"babel-eslint": "^10.1.0",
+		"codecov": "^3.7.0",
 		"eslint": "^7.3.0",
 		"eslint-plugin-import": "^2.20.2",
 		"jsdoc": "^3.6.3",
 		"magic-string": "^0.25.7",
 		"mocha": "^8.0.1",
+		"nyc": "^15.1.0",
 		"rollup": "^2.3.2",
 		"rollup-plugin-terser": "^6.1.0",
 		"tui-jsdoc-template": "^1.2.2"

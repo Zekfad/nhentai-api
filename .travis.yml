@@ -1,0 +1,23 @@
+language: node_js
+os: linux
+dist: xenial
+jobs:
+  include:
+  - name: Node 10
+    node_js: 10
+  - name: Node 12
+    node_js: 12
+  - name: Node 13
+    node_js: 13
+  - name: Node 14
+    node_js: 14
+#  - name: Latest Node - Windows
+#    node_js: node
+#    os: windows
+#  - name: Latest Node - OSX
+#    node_js: node
+#    os: osx
+  - name: Latest Node - Linux
+    node_js: node
+    os: linux
+    after_success: yarn run coverage
