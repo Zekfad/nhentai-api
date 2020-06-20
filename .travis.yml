@@ -1,6 +1,7 @@
 language: node_js
 os: linux
 dist: xenial
+before_script: yarn build
 jobs:
   include:
   - name: Node 10
@@ -20,4 +21,4 @@ jobs:
   - name: Latest Node - Linux
     node_js: node
     os: linux
-    after_success: yarn run coverage
+    after_success: echo SKIPPED - yarn run coverage
