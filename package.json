@@ -21,10 +21,10 @@
 	"homepage": "https://github.com/Zekfad/nhentai-api",
 	"bugs": {
 		"url": "https://github.com/Zekfad/nhentai-api/issues",
-		"email": "zekfad@znnme.ru.eu.org"
+		"email": "zekfad@znnme.eu.org"
 	},
 	"license": "ISC",
-	"author": "Zekfad <zekfad@znnme.ru.eu.org> (https://znnme.ru.eu.org)",
+	"author": "Zekfad <zekfad@znnme.eu.org> (https://zekfad.znnme.eu.org)",
 	"repository": "github:Zekfad/nhentai-api",
 	"types": "nhentai-api.d.ts",
 	"scripts": {
