@@ -21,4 +21,4 @@ jobs:
   - name: Latest Node - Linux
     node_js: node
     os: linux
-    after_success: echo SKIPPED - yarn run coverage
+    after_success: yarn run coverage
