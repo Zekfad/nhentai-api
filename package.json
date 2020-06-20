@@ -26,12 +26,14 @@
 	"license": "ISC",
 	"author": "Zekfad <zekfad@znnme.ru.eu.org> (https://znnme.ru.eu.org)",
 	"repository": "github:Zekfad/nhentai-api",
+	"types": "nhentai-api.d.ts",
 	"scripts": {
 		"lint": "eslint . --ext .js,.cjs,.mjs",
 		"dev": "rollup -c --watch --environment mode:dev",
-		"gen:docs": "jsdoc -c .jsdoc.json --verbose",
-		"gen:def": "jsdoc -c .jsdoc.json -t node_modules/tsd-jsdoc/dist -d . --verbose",
-		"build": "rollup -c",
+		"build": "run-p build:**",
+		"build:src": "rollup -c",
+		"build:docs": "jsdoc -c .jsdoc.json --verbose",
+		"build:def": "jsdoc -c .jsdoc.json  --verbose -t node_modules/tsd-jsdoc/dist -d .",
 		"test": "nyc --reporter=lcov mocha",
 		"coverage": "codecov"
 	},
@@ -57,5 +59,8 @@
 	},
 	"engines": {
 		"node": ">=8.16.1"
+	},
+	"dependencies": {
+		"npm-run-all": "^4.1.5"
 	}
 }
