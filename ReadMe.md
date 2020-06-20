@@ -18,6 +18,12 @@ Install via npm:
 npm i nhentai-api
 ```
 
+Install via yarn:
+
+```
+yarn add nhentai-api
+```
+
 ## Docs
 
 [Read the docs on GitHub pages.](https://zekfad.github.io/nhentai-api/)
