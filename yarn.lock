@@ -2605,6 +2605,13 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
+tsd-jsdoc@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/tsd-jsdoc/-/tsd-jsdoc-2.5.0.tgz#0677aa952e1a8e3ebbb5bcf7d6e2f0301d71e151"
+  integrity sha512-80fcJLAiUeerg4xPftp+iEEKWUjJjHk9AvcHwJqA8Zw0R4oASdu3kT/plE/Zj19QUTz8KupyOX25zStlNJjS9g==
+  dependencies:
+    typescript "^3.2.1"
+
 tui-jsdoc-template@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/tui-jsdoc-template/-/tui-jsdoc-template-1.2.2.tgz#e382e2c99e457aa9df14d6fc036331046d4acee7"
@@ -2630,6 +2637,11 @@ typedarray-to-buffer@^3.1.5:
   integrity sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==
   dependencies:
     is-typedarray "^1.0.0"
+
+typescript@^3.2.1:
+  version "3.9.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.5.tgz#586f0dba300cde8be52dd1ac4f7e1009c1b13f36"
+  integrity sha512-hSAifV3k+i6lEoCJ2k6R2Z/rp/H3+8sdmcn5NrS3/3kE7+RyZXm9aqvxWqjEXHAd8b0pShatpcdMTvEdvAJltQ==
 
 uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.6"

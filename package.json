@@ -27,9 +27,10 @@
 	"author": "Zekfad <zekfad@znnme.ru.eu.org> (https://znnme.ru.eu.org)",
 	"repository": "github:Zekfad/nhentai-api",
 	"scripts": {
-		"lint": "eslint . --ext .js,.mjs",
+		"lint": "eslint . --ext .js,.cjs,.mjs",
 		"dev": "rollup -c --watch --environment mode:dev",
-		"gendocs": "jsdoc --configure .jsdoc.json --verbose",
+		"gen:docs": "jsdoc -c .jsdoc.json --verbose",
+		"gen:def": "jsdoc -c .jsdoc.json -t node_modules/tsd-jsdoc/dist -d . --verbose",
 		"build": "rollup -c",
 		"test": "nyc --reporter=lcov mocha",
 		"coverage": "codecov"
@@ -51,6 +52,7 @@
 		"nyc": "^15.1.0",
 		"rollup": "^2.3.2",
 		"rollup-plugin-terser": "^6.1.0",
+		"tsd-jsdoc": "^2.5.0",
 		"tui-jsdoc-template": "^1.2.2"
 	},
 	"engines": {
