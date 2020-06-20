@@ -1,4 +1,4 @@
-import babel from 'rollup-plugin-babel';
+import babel from '@rollup/plugin-babel';
 import babelProposalClassProperties from '@babel/plugin-proposal-class-properties';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -20,8 +20,9 @@ let plugins = [];
 
 plugins.push(...[
 	babel({
-		exclude: 'node_modules/**',
-		plugins: [ babelProposalClassProperties, ],
+		exclude     : 'node_modules/**',
+		plugins     : [ babelProposalClassProperties, ],
+		babelHelpers: 'bundled',
 	}),
 	json(),
 	resolve({
@@ -88,7 +89,6 @@ if (!('dev' === (process.env.mode && process.env.mode.toLowerCase())))
 			output: {
 				comments: 'all',
 			},
-			sourcemap      : true,
 			mangle         : false,
 			keep_classnames: true,
 			keep_fnames    : true,
@@ -99,12 +99,12 @@ export default {
 	input : joinPath(srcDir, 'index.js'),
 	output: [
 		{
-			file     : joinPath(distDir, 'cjs', 'bundle.js'),
+			file     : joinPath(distDir, 'cjs', 'bundle.cjs'),
 			format   : 'cjs',
 			sourcemap: true,
 		},
 		{
-			file     : joinPath(distDir, 'esm', 'bundle.js'),
+			file     : joinPath(distDir, 'esm', 'bundle.mjs'),
 			format   : 'es',
 			sourcemap: true,
 		},
