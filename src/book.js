@@ -86,36 +86,42 @@ class Book {
 	/**
 	 * Book ID.
 	 * @type {number}
+	 * @default 0
 	 */
 	id = 0;
 
 	/**
 	 * Book Media ID.
 	 * @type {number}
+	 * @default 0
 	 */
 	media = 0;
 
 	/**
 	 * Book favours count.
 	 * @type {number}
+	 * @default 0
 	 */
 	favorites = 0;
 
 	/**
 	 * Book scanlator.
 	 * @type {string}
+	 * @default '''
 	 */
 	scanlator = '';
 
 	/**
 	 * Book upload date.
 	 * @type {Date}
+	 * @default new Date(0)
 	 */
 	uploaded = new Date(0);
 
 	/**
 	 * Book tags.
 	 * @type {Tag[]}
+	 * @default []
 	 */
 	tags = [];
 
@@ -128,6 +134,7 @@ class Book {
 	/**
 	 * Book pages.
 	 * @type {Image[]}
+	 * @default []
 	 */
 	pages = [];
 

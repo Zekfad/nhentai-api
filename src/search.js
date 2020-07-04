@@ -33,24 +33,28 @@ class Search {
 	/**
 	 * Page ID.
 	 * @type {number}
+	 * @default 1
 	 */
 	page = 1;
 
 	/**
 	 * Books per page.
 	 * @type {number}
+	 * @default 0
 	 */
 	perPage = 0;
 
 	/**
 	 * Books array.
 	 * @type {Book[]}
+	 * @default []
 	 */
 	books = [];
 
 	/**
 	 * Pages count.
 	 * @type {number}
+	 * @default 1
 	 */
 	pages = 1;
 

@@ -33,6 +33,7 @@ class TagType {
 	/**
 	 * @type {TagTypes}
 	 * @static
+	 * @default {}
 	 */
 	static knownTypes = {};
 
