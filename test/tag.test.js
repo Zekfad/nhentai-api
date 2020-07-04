@@ -21,7 +21,7 @@ describe('Tag', () => {
 
 		describe('#get', () => {
 
-			it('should warp tag-like object into tag instance ', () => {
+			it('should warp tag-like object into tag instance', () => {
 
 				let targetTag = new Tag({
 					id: 10,
@@ -38,7 +38,7 @@ describe('Tag', () => {
 
 			});
 
-			it('should return tag instance back if presented ', () => {
+			it('should return tag instance back if presented', () => {
 
 				let targetTag = new Tag({
 					id: 10,
