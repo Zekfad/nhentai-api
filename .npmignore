@@ -34,9 +34,8 @@ docs/
 test/
 
 # Development configs and utils
-**/.eslintignore
-**/.eslintrc*
+**/.*ignore
+**/.*rc*
 **/.jsdoc*
-**/rollup.config.js
-**/.babelrc*
-**/.travis*
+**/rollup.config.*
+**/.*.yml
