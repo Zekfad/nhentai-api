@@ -21,7 +21,6 @@ build_script:
 
 before_test:
   - node --version
-  - npm --version
   - yarn --version
 
 test_script:
