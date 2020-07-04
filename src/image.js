@@ -98,6 +98,8 @@ class Image {
 		JPEG: new ImageType('jpeg', 'jpg'),
 		PNG : new ImageType('png', 'png'),
 
+		Unknown: new UnknownImageType('unknwon', 'unknownExt'),
+
 		/**
 		 * Known image types.
 		 * @type {ImageType}
