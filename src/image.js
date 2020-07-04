@@ -65,6 +65,14 @@ class ImageType {
 	get isKnown() {
 		return !(this instanceof UnknownImageType);
 	}
+
+	/**
+	 * Alias for type.
+	 * @type {?string}
+	 */
+	get name() {
+		return this.type;
+	}
 }
 
 /**
