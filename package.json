@@ -33,7 +33,7 @@
 		"build": "run-p build:**",
 		"build:src": "rollup -c",
 		"build:docs": "jsdoc -c .jsdoc.json --verbose",
-		"build:def": "jsdoc -c .jsdoc.json  --verbose -t node_modules/tsd-jsdoc/dist -d .",
+		"build:def": "jsdoc -c .jsdoc.json --verbose -t node_modules/tsd-jsdoc/dist -d .",
 		"test": "nyc --reporter=lcov mocha",
 		"coverage": "codecov"
 	},
