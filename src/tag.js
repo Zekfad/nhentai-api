@@ -137,6 +137,41 @@ class Tag {
 	}
 
 	/**
+	 * Tag ID.
+	 * @type {number}
+	 * @default 0
+	 */
+	id = 0;
+
+	/**
+	 * Tag type.
+	 * @type {TagType|UnknownTagType}
+	 * @default TagTypes.Unknown
+	 */
+	type = this.constructor.types.Unknown;
+
+	/**
+	 * Tag name.
+	 * @type {string}
+	 * @default ""
+	 */
+	name = '';
+
+	/**
+	 * Count of books tagged with this tag.
+	 * @type {number}
+	 * @default 0
+	 */
+	count = 0;
+
+	/**
+	 * Tag URL.
+	 * @type {string}
+	 * @default ""
+	 */
+	url = '';
+
+	/**
 	 * Create tag.
 	 * @param {object}         [params]                       Tag parameters.
 	 * @param {number}         [params.id=0]                  Tag id.
