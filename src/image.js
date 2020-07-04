@@ -125,7 +125,9 @@ class Image {
 						break;
 				}
 			}
-			return ((known = this.known[type])) ? known : new UnknownImageType(type);
+			return ((known = this.known[type]))
+				? known
+				: new UnknownImageType(type);
 		},
 	};
 
