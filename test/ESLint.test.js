@@ -22,7 +22,7 @@ function formatMessages(messages) {
 }
 
 describe('ESLint', function () {
-	this.timeout(10000);
+	this.timeout(2 * 60 * 1000);
 
 	let lintResults;
 
