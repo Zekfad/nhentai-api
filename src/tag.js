@@ -207,8 +207,10 @@ class Tag {
 	compare(tag, strict = false) {
 		tag = this.constructor.get(tag);
 
+		if (this.id !== tag.id)
+			return false;
+
 		return !![
-			'id',
 			'type',
 			'name',
 			'count',
