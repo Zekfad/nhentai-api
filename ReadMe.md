@@ -1,6 +1,6 @@
 # Node.JS implementation of nhentai.net's undocumented APIs.
 
-[![npm version](https://img.shields.io/npm/v/nhentai-api?style=for-the-badge)](https://www.npmjs.com/package/nhentai-api)![node version](https://img.shields.io/node/v/nhentai-api?style=for-the-badge)[![Build status](https://img.shields.io/travis/Zekfad/nhentai-api?style=for-the-badge)](https://travis-ci.org/github/Zekfad/nhentai-api)[![Codecov](https://img.shields.io/codecov/c/gh/Zekfad/nhentai-api?style=for-the-badge)](https://codecov.io/gh/Zekfad/nhentai-api)
+[![npm version](https://img.shields.io/npm/v/nhentai-api?style=for-the-badge)](https://www.npmjs.com/package/nhentai-api)![node version](https://img.shields.io/node/v/nhentai-api?style=for-the-badge)[![Build status - Linux/OSX](https://img.shields.io/travis/Zekfad/nhentai-api?style=for-the-badge&logo=linux&logoColor=white)](https://travis-ci.org/github/Zekfad/nhentai-api)[![Build status - Windows](https://img.shields.io/appveyor/build/Zekfad/nhentai-api?style=for-the-badge&logo=windows&logoColor=white)](https://ci.appveyor.com/project/Zekfad/nhentai-api)[![Codecov](https://img.shields.io/codecov/c/gh/Zekfad/nhentai-api?style=for-the-badge)](https://codecov.io/gh/Zekfad/nhentai-api)
 
 
 Node.JS module for handling nhentai.net API.
