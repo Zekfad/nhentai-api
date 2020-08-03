@@ -127,11 +127,12 @@ describe('Tag', () => {
 				name : 'test',
 				count: 10,
 				id   : 10,
+				url  : '/test/',
 			});
 
 		describe('#compare', () => {
 
-			it('should test if tags are the the same (non strict)', () => {
+			it('should test if tags are the the same (strict: false)', () => {
 
 				assert.strictEqual(
 					tag.compare(tag),
@@ -141,7 +142,7 @@ describe('Tag', () => {
 				assert.strictEqual(
 					tag.compare(
 						new Tag({
-							id: 10,
+							id: tag.id,
 						})
 					),
 					true
@@ -156,7 +157,7 @@ describe('Tag', () => {
 
 			});
 
-			it('should test if tags are the the same (strict)', () => {
+			it('should test if tags are the the same (strict: true)', () => {
 
 				assert.strictEqual(
 					tag.compare(tag, true),
@@ -166,7 +167,7 @@ describe('Tag', () => {
 				assert.strictEqual(
 					tag.compare(
 						new Tag({
-							id: 10,
+							id: tag.id,
 						}),
 						true
 					),
@@ -177,6 +178,34 @@ describe('Tag', () => {
 					tag.compare(
 						new Tag({}),
 						true
+					),
+					false
+				);
+
+			});
+
+			it('should test if tags are the the same (strict: \'any\')', () => {
+
+				assert.strictEqual(
+					tag.compare(tag, 'any'),
+					true
+				);
+
+				assert.strictEqual(
+					tag.compare(
+						new Tag({
+							name: tag.name,
+							id  : tag.id + 1,
+						}),
+						'any'
+					),
+					true
+				);
+
+				assert.strictEqual(
+					tag.compare(
+						new Tag({}),
+						'any'
 					),
 					false
 				);

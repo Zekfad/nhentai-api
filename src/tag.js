@@ -201,17 +201,21 @@ class Tag {
 
 	/**
 	 * Compare this to given one.
-	 * @param {string|Tag} tag            Tag to compare with.
-	 * @param {boolean}    [strict=false] Whatever all parameters must be the same.
+	 * By default tags with different id will return false.
+	 * If you want to check whatever tag has any of properties from another tag pass `'any'` to `strict` parameter.
+	 * @param {string|Tag} tag                Tag to compare with.
+	 * @param {boolean|string} [strict=false] Whatever all parameters must be the same.
 	 * @returns {boolean} Whatever tags are equal.
 	 */
 	compare(tag, strict = false) {
 		tag = this.constructor.get(tag);
-
-		if (this.id !== tag.id)
+		if (strict === 'any')
+			strict = false;
+		else if (this.id !== tag.id)
 			return false;
 
 		return !![
+			'id',
 			'type',
 			'name',
 			'count',

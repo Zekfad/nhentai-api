@@ -246,10 +246,7 @@ class Book {
 	hasTag(tag, strict = true) {
 		tag = Tag.get(tag);
 
-		if (tag instanceof Tag) {
-			return this.tags.some(elem => elem.compare(tag, strict));
-		}
-		return false;
+		return this.tags.some(elem => elem.compare(tag, strict));
 	}
 
 	/**
@@ -257,7 +254,17 @@ class Book {
 	 * @param {object|Tag} tag Tag.
 	 */
 	hasTagWith(tag) {
-		return this.hasTag(tag, false);
+		return this.hasTag(tag, 'any');
+	}
+
+	/**
+	 * Get any tags with certain properties from book.
+	 * @param {object|Tag} tag Tag.
+	 */
+	getTagsWith(tag) {
+		tag = Tag.get(tag);
+
+		return this.tags.filter(elem => elem.compare(tag, 'any'));
 	}
 }
 

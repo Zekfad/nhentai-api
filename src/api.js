@@ -223,7 +223,11 @@ class API {
 				})
 			);
 
-		search.page = page;
+		Object.assign(search, {
+			api: this,
+			query,
+			page,
+		});
 
 		return search;
 	}
@@ -257,20 +261,21 @@ class API {
 	 * @async
 	 */
 	async searchTagged(tag, page = 1) {
+		if (!(tag instanceof Tag))
+			tag = Tag.get({ id: +tag, });
 		let { host, apiPath, } = this.getAPIArgs('api', 'searchTagged'),
 			search = Search.parse(
 				await this.request({
 					host,
-					path: apiPath(
-						tag instanceof Tag
-							? tag.id
-							: +tag,
-						page
-					),
+					path: apiPath(tag.id, page),
 				})
 			);
 
-		search.page = page;
+		Object.assign(search, {
+			api  : this,
+			query: tag,
+			page,
+		});
 
 		return search;
 	}
