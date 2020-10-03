@@ -39,3 +39,5 @@ test/
 **/.jsdoc*
 **/rollup.config.*
 **/.*.yml
+**/tsconfig.json
+**/*.tgz
