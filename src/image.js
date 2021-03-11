@@ -139,7 +139,6 @@ class Image {
 					case 'gif':
 						type = 'gif';
 						break;
-					
 				}
 			}
 			return ((known = this.known[type]))
