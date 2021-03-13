@@ -1,6 +1,8 @@
 const
 	assert = require('assert'),
+
 	nhentai = require('..');
+
 
 describe('Image', () => {
 	const {
@@ -15,7 +17,8 @@ describe('Image', () => {
 		it('should create image attached to the book', () => {
 
 			let attachedImage = new Image({ book, }),
-				orphanImage = new Image();
+				orphanImage = new Image(),
+				badBookImage = new Image({ book: 'bad', });
 
 			assert.strictEqual(
 				attachedImage.book,
@@ -24,6 +27,11 @@ describe('Image', () => {
 
 			assert.strictEqual(
 				orphanImage.book,
+				Book.Unknown
+			);
+
+			assert.strictEqual(
+				badBookImage.book,
 				Book.Unknown
 			);
 
@@ -37,28 +45,80 @@ describe('Image', () => {
 
 			it('should parse image object from API and return Image instance', () => {
 
-				let targetImageProps = {
-						type  : Image.types.JPEG,
-						id    : 1,
-						width : 10,
-						height: 10,
-					},
-					image = Image.parse({
-						t: 'j',
-						w: '10',
-						h: '10',
-					}, 1),
-					imageProps = {
-						type  : image.type,
-						id    : image.id,
-						width : image.width,
-						height: image.height,
-					};
+				(() => {
+					let targetImageProps = {
+							type  : Image.types.JPEG,
+							id    : 1,
+							width : 10,
+							height: 10,
+						},
+						image = Image.parse({
+							t: 'j',
+							w: '10',
+							h: '10',
+						}, 1),
+						imageProps = {
+							type  : image.type,
+							id    : image.id,
+							width : image.width,
+							height: image.height,
+						};
 
-				assert.deepStrictEqual(
-					imageProps,
-					targetImageProps
-				);
+					assert.deepStrictEqual(
+						imageProps,
+						targetImageProps
+					);
+				})();
+
+				(() => {
+					let targetImageProps = {
+							type  : Image.types.JPEG,
+							id    : 0,
+							width : 10,
+							height: 10,
+						},
+						image = Image.parse({
+							t: 'j',
+							w: '10',
+							h: '10',
+						}),
+						imageProps = {
+							type  : image.type,
+							id    : image.id,
+							width : image.width,
+							height: image.height,
+						};
+
+					assert.deepStrictEqual(
+						imageProps,
+						targetImageProps
+					);
+				})();
+
+				(() => {
+					let targetImageProps = {
+							type  : Image.types.JPEG,
+							id    : 0,
+							width : 10,
+							height: 10,
+						},
+						image = Image.parse({
+							t: 'j',
+							w: '10',
+							h: '10',
+						}, 'bad'),
+						imageProps = {
+							type  : image.type,
+							id    : image.id,
+							width : image.width,
+							height: image.height,
+						};
+
+					assert.deepStrictEqual(
+						imageProps,
+						targetImageProps
+					);
+				})();
 
 			});
 
@@ -101,6 +161,11 @@ describe('Image', () => {
 
 					assert.strictEqual(
 						Image.types.get('unknown') instanceof Image.types.Unknown.constructor,
+						true
+					);
+
+					assert.strictEqual(
+						Image.types.get({ bad: true, }) instanceof Image.types.Unknown.constructor,
 						true
 					);
 
