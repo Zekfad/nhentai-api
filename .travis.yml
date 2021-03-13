@@ -15,6 +15,8 @@ jobs:
     node_js: 13
   - name: Node 14
     node_js: 14
+  - name: Node 15
+    node_js: 15
 #  - name: Latest Node - Windows
 #    node_js: node
 #    os: windows
