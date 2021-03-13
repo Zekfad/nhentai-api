@@ -17,6 +17,7 @@ import Book from './book';
  * @typedef {object} ImageTypes
  * @property {TagType} JPEG JPEG image type.
  * @property {TagType} PNG  PNG image type.
+ * @property {TagType} GIF  GIF image type.
  */
 
 /**
@@ -105,6 +106,7 @@ class Image {
 	static types = {
 		JPEG: new ImageType('jpeg', 'jpg'),
 		PNG : new ImageType('png', 'png'),
+		GIF : new ImageType('gif', 'gif'),
 
 		Unknown: new UnknownImageType('unknwon', 'unknownExt'),
 
@@ -132,6 +134,10 @@ class Image {
 					case 'p':
 					case 'png':
 						type = 'png';
+						break;
+					case 'g':
+					case 'gif':
+						type = 'gif';
 						break;
 				}
 			}
