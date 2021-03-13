@@ -71,6 +71,16 @@ describe('Image', () => {
 				it('should return ImageType instance for known types', () => {
 
 					assert.strictEqual(
+						Image.types.get('g'),
+						Image.types.GIF
+					);
+
+					assert.strictEqual(
+						Image.types.get('gif'),
+						Image.types.GIF
+					);
+
+					assert.strictEqual(
 						Image.types.get('p'),
 						Image.types.PNG
 					);
