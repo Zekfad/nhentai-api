@@ -6,6 +6,7 @@ import API from './api';
 import Book from './book';
 import Tag from './tag';
 
+
 /**
  * Search object from API.
  * @global

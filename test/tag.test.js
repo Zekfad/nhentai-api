@@ -1,6 +1,8 @@
 const
 	assert = require('assert'),
+
 	nhentai = require('..');
+
 
 describe('Tag', () => {
 	const { Tag, } = nhentai;

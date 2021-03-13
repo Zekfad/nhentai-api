@@ -5,6 +5,7 @@
 import Image from './image';
 import Tag from './tag';
 
+
 /**
  * Book object from API.
  * @global
