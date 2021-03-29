@@ -1,0 +1,763 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{ <i>webdoc</i> }: Search</title>
+
+    <link type="text/css" rel="stylesheet" href="/styles/index.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Roboto+Mono&display=swap" />
+    <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/googlecode.min.css">
+
+    
+
+    <script>
+      window.appData = {
+        applicationName: "{ <i>webdoc</i> }",
+        siteRoot: "",
+        integrations: JSON.parse(`{}`),
+      };
+    </script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    
+    <script src="/scripts/default-template.js"></script>
+  </head>
+  <body class="root">
+    <div class="docs">
+      <article class="page">
+        <div class="page-explorer" id="explorer-mount-point"></div>
+        <div class="header-content-container">
+          <section class="header" id="header-mount-point"></section>
+          <div class="header-content-container__content">
+            
+            
+<div class="page-content">
+  <div class="document">
+    <div class="document__breadcrumb">
+      
+        nhentai-api
+        &gt;
+      
+      
+      <span>Search</span>
+    </div>
+    <h1 class="document__title">Search</h1>
+    
+<pre class="signature__container"><code class="signature">class Search</code></pre>
+
+
+    <div class="document__brief"></div>
+    <div class="document__description"><p>Class representing search request results.</p></div>
+
+    
+      
+<div class="members">
+  <h2 class="members__category">Constructor</h2>
+  <hr />
+
+  
+    
+<div class="member" id="constructor">
+  
+  
+<pre class="signature__container"><code class="signature">new Search(params: object) → {}</code></pre>
+
+
+  <div class="member__brief"></div>
+  <div class="member__description"><p>Create search.</p></div>
+
+  
+    
+<div class="table-wrapper">
+  <table class="member-parameters">
+    <caption class="member-parameters__caption">Parameters:</caption>
+    <thead class="member-parameters__head">
+      <tr class="member-parameter-header">
+        <th class="member-parameter-header__name">Name</th>
+        <th class="member-parameter-header__type">Type</th>
+        <th class="member-parameter-header__attributes">Attributes</th>
+        <th class="member-parameter-header__default">Default</th>
+        <th class="member-parameter-header__description">Description</th>
+      </tr>
+    </thead>
+    <tbody class="member-parameters__body">
+      <tr class="member-parameter">
+        <td class="member-parameter__name">
+          params
+        </td>
+        <td class="member-parameter__type">
+          object
+        </td>
+        <td class="member-parameter__attributes">
+          <p>&lt;optional&gt;</p>
+          
+          
+        </td>
+        <td class="member-parameter__default">
+          
+        </td>
+        <td class="member-parameter__description"><p>Search parameters.</p></td>
+      </tr><tr class="member-parameter">
+        <td class="member-parameter__name">
+          params.query
+        </td>
+        <td class="member-parameter__type">
+          string
+        </td>
+        <td class="member-parameter__attributes">
+          <p>&lt;optional&gt;</p>
+          
+          
+        </td>
+        <td class="member-parameter__default">
+          ''
+        </td>
+        <td class="member-parameter__description"><p>Query string.</p></td>
+      </tr><tr class="member-parameter">
+        <td class="member-parameter__name">
+          params.page
+        </td>
+        <td class="member-parameter__type">
+          number
+        </td>
+        <td class="member-parameter__attributes">
+          <p>&lt;optional&gt;</p>
+          
+          
+        </td>
+        <td class="member-parameter__default">
+          1
+        </td>
+        <td class="member-parameter__description"><p>Search page ID.</p></td>
+      </tr><tr class="member-parameter">
+        <td class="member-parameter__name">
+          params.pages
+        </td>
+        <td class="member-parameter__type">
+          number
+        </td>
+        <td class="member-parameter__attributes">
+          <p>&lt;optional&gt;</p>
+          
+          
+        </td>
+        <td class="member-parameter__default">
+          1
+        </td>
+        <td class="member-parameter__description"><p>Search pages count.</p></td>
+      </tr><tr class="member-parameter">
+        <td class="member-parameter__name">
+          params.perPage
+        </td>
+        <td class="member-parameter__type">
+          number
+        </td>
+        <td class="member-parameter__attributes">
+          <p>&lt;optional&gt;</p>
+          
+          
+        </td>
+        <td class="member-parameter__default">
+          0
+        </td>
+        <td class="member-parameter__description"><p>Search books per page.</p></td>
+      </tr><tr class="member-parameter">
+        <td class="member-parameter__name">
+          params.books
+        </td>
+        <td class="member-parameter__type">
+          Array&lt;<a href="/nhentai-api/Book.html">Book</a>&gt;
+        </td>
+        <td class="member-parameter__attributes">
+          <p>&lt;optional&gt;</p>
+          
+          
+        </td>
+        <td class="member-parameter__default">
+          []
+        </td>
+        <td class="member-parameter__description"><p>Books array.</p></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  
+
+  
+</div>
+
+  
+</div>
+
+    
+
+    
+
+<div class="members">
+  <h2 class="members__category">Summary</h2>
+  <hr />
+  
+
+
+  
+  <div class="accordion accordion-active">
+    <section class="accordion__toggle">
+      <button>
+        <img class="accordion__bg-inactive" src="/icons/chevron-down.svg"/>
+        <img class="accordion__bg-active" src="/icons/chevron-up.svg"/>
+      </button>
+      <h3 class="members__subcategory">Properties from Search</h3>
+    </section>
+    <div class="accordion__content table-wrapper">
+      <table class="summary">
+        <tbody>
+          
+            <tr>
+              <td class="summary__signature">
+                
+                  ?<a href=/nhentai-api/API.html>API</a>
+                
+              </td>
+              <td>
+                <section class="summary__signature">
+                  <a href="/nhentai-api/Search.html#api">api = null</a>
+                </section>
+                <section>
+                  
+                </section>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="summary__signature">
+                
+                  Array&lt;<a href=/nhentai-api/Book.html>Book</a>&gt;
+                
+              </td>
+              <td>
+                <section class="summary__signature">
+                  <a href="/nhentai-api/Search.html#books">books = []</a>
+                </section>
+                <section>
+                  
+                </section>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="summary__signature">
+                
+                  number
+                
+              </td>
+              <td>
+                <section class="summary__signature">
+                  <a href="/nhentai-api/Search.html#page">page = 1</a>
+                </section>
+                <section>
+                  
+                </section>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="summary__signature">
+                
+                  number
+                
+              </td>
+              <td>
+                <section class="summary__signature">
+                  <a href="/nhentai-api/Search.html#pages">pages = 1</a>
+                </section>
+                <section>
+                  
+                </section>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="summary__signature">
+                
+                  number
+                
+              </td>
+              <td>
+                <section class="summary__signature">
+                  <a href="/nhentai-api/Search.html#perPage">perPage = 0</a>
+                </section>
+                <section>
+                  
+                </section>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="summary__signature">
+                
+                  ?string
+                
+              </td>
+              <td>
+                <section class="summary__signature">
+                  <a href="/nhentai-api/Search.html#query">query = null</a>
+                </section>
+                <section>
+                  
+                </section>
+              </td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  
+
+
+  
+  <div class="accordion accordion-active">
+    <section class="accordion__toggle">
+      <button>
+        <img class="accordion__bg-inactive" src="/icons/chevron-down.svg"/>
+        <img class="accordion__bg-active" src="/icons/chevron-up.svg"/>
+      </button>
+      <h3 class="members__subcategory">Methods from Search</h3>
+    </section>
+    <div class="accordion__content table-wrapper">
+      <table class="summary">
+        <tbody>
+          
+            <tr>
+              <td class="summary__signature">
+                
+              </td>
+              <td>
+                <section class="summary__signature">
+                  <a href="/nhentai-api/Search.html#parse">static parse(search: <a href="/nhentai-api/APISearch.html">APISearch</a>)</a>
+                </section>
+                <section>
+                  
+                </section>
+              </td>
+            </tr>
+          
+            <tr>
+              <td class="summary__signature">
+                
+                  Promise&lt;<a href="/nhentai-api/Search.html">Search</a>&gt;
+                
+              </td>
+              <td>
+                <section class="summary__signature">
+                  <a href="/nhentai-api/Search.html#getNextPage">getNextPage(api: <a href="/nhentai-api/API.html">API</a>)</a>
+                </section>
+                <section>
+                  
+                </section>
+              </td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  
+
+
+
+  
+
+
+
+</div>
+
+
+    
+<div class="members">
+  <h2 class="members__category">Public Properties</h2>
+  <hr />
+
+  
+    
+<div class="member" id="api">
+  
+    <section class="member__title">
+      <a href="/nhentai-api/Search.html#api">
+        <img
+          src="/icons/link.svg"
+          width="16px"
+          height="16px"
+        />
+      </a>
+      <span>api</span>
+    </section>
+  
+  
+<pre class="signature__container"><code class="signature">api: ?<a href=/nhentai-api/API.html>API</a> = null</code></pre>
+
+
+  <div class="member__brief"></div>
+  <div class="member__description"><p>API instance.</p></div>
+
+  
+
+  
+</div>
+
+  
+    
+<div class="member" id="books">
+  
+    <section class="member__title">
+      <a href="/nhentai-api/Search.html#books">
+        <img
+          src="/icons/link.svg"
+          width="16px"
+          height="16px"
+        />
+      </a>
+      <span>books</span>
+    </section>
+  
+  
+<pre class="signature__container"><code class="signature">books: Array&lt;<a href=/nhentai-api/Book.html>Book</a>> = []</code></pre>
+
+
+  <div class="member__brief"></div>
+  <div class="member__description"><p>Books array.</p></div>
+
+  
+
+  
+</div>
+
+  
+    
+<div class="member" id="page">
+  
+    <section class="member__title">
+      <a href="/nhentai-api/Search.html#page">
+        <img
+          src="/icons/link.svg"
+          width="16px"
+          height="16px"
+        />
+      </a>
+      <span>page</span>
+    </section>
+  
+  
+<pre class="signature__container"><code class="signature">page: number = 1</code></pre>
+
+
+  <div class="member__brief"></div>
+  <div class="member__description"><p>Page ID.</p></div>
+
+  
+
+  
+</div>
+
+  
+    
+<div class="member" id="pages">
+  
+    <section class="member__title">
+      <a href="/nhentai-api/Search.html#pages">
+        <img
+          src="/icons/link.svg"
+          width="16px"
+          height="16px"
+        />
+      </a>
+      <span>pages</span>
+    </section>
+  
+  
+<pre class="signature__container"><code class="signature">pages: number = 1</code></pre>
+
+
+  <div class="member__brief"></div>
+  <div class="member__description"><p>Pages count.</p></div>
+
+  
+
+  
+</div>
+
+  
+    
+<div class="member" id="perPage">
+  
+    <section class="member__title">
+      <a href="/nhentai-api/Search.html#perPage">
+        <img
+          src="/icons/link.svg"
+          width="16px"
+          height="16px"
+        />
+      </a>
+      <span>perPage</span>
+    </section>
+  
+  
+<pre class="signature__container"><code class="signature">perPage: number = 0</code></pre>
+
+
+  <div class="member__brief"></div>
+  <div class="member__description"><p>Books per page.</p></div>
+
+  
+
+  
+</div>
+
+  
+    
+<div class="member" id="query">
+  
+    <section class="member__title">
+      <a href="/nhentai-api/Search.html#query">
+        <img
+          src="/icons/link.svg"
+          width="16px"
+          height="16px"
+        />
+      </a>
+      <span>query</span>
+    </section>
+  
+  
+<pre class="signature__container"><code class="signature">query: ?string = null</code></pre>
+
+
+  <div class="member__brief"></div>
+  <div class="member__description"><p>Query string.</p></div>
+
+  
+
+  
+</div>
+
+  
+</div>
+
+    
+    
+<div class="members">
+  <h2 class="members__category">Public Methods</h2>
+  <hr />
+
+  
+    
+<div class="member" id="parse">
+  
+    <section class="member__title">
+      <a href="/nhentai-api/Search.html#parse">
+        <img
+          src="/icons/link.svg"
+          width="16px"
+          height="16px"
+        />
+      </a>
+      <span>parse</span>
+    </section>
+  
+  
+<pre class="signature__container"><code class="signature">static parse(search: <a href="/nhentai-api/APISearch.html">APISearch</a>) → {}</code></pre>
+
+
+  <div class="member__brief"></div>
+  <div class="member__description"><p>Parse search object into class instance.</p></div>
+
+  
+    
+<div class="table-wrapper">
+  <table class="member-parameters">
+    <caption class="member-parameters__caption">Parameters:</caption>
+    <thead class="member-parameters__head">
+      <tr class="member-parameter-header">
+        <th class="member-parameter-header__name">Name</th>
+        <th class="member-parameter-header__type">Type</th>
+        
+        
+        <th class="member-parameter-header__description">Description</th>
+      </tr>
+    </thead>
+    <tbody class="member-parameters__body">
+      <tr class="member-parameter">
+        <td class="member-parameter__name">
+          search
+        </td>
+        <td class="member-parameter__type">
+          <a href="/nhentai-api/APISearch.html">APISearch</a>
+        </td>
+        
+        
+        <td class="member-parameter__description"><p>Search object.</p></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  
+
+  
+</div>
+
+  
+    
+<div class="member" id="getNextPage">
+  
+    <section class="member__title">
+      <a href="/nhentai-api/Search.html#getNextPage">
+        <img
+          src="/icons/link.svg"
+          width="16px"
+          height="16px"
+        />
+      </a>
+      <span>getNextPage</span>
+    </section>
+  
+  
+<pre class="signature__container"><code class="signature">getNextPage(api: <a href="/nhentai-api/API.html">API</a>) → {Promise&lt;<a href="/nhentai-api/Search.html">Search</a>>}</code></pre>
+
+
+  <div class="member__brief"></div>
+  <div class="member__description"><p>Request next page.</p></div>
+
+  
+    
+<div class="table-wrapper">
+  <table class="member-parameters">
+    <caption class="member-parameters__caption">Parameters:</caption>
+    <thead class="member-parameters__head">
+      <tr class="member-parameter-header">
+        <th class="member-parameter-header__name">Name</th>
+        <th class="member-parameter-header__type">Type</th>
+        <th class="member-parameter-header__attributes">Attributes</th>
+        <th class="member-parameter-header__default">Default</th>
+        <th class="member-parameter-header__description">Description</th>
+      </tr>
+    </thead>
+    <tbody class="member-parameters__body">
+      <tr class="member-parameter">
+        <td class="member-parameter__name">
+          api
+        </td>
+        <td class="member-parameter__type">
+          <a href="/nhentai-api/API.html">API</a>
+        </td>
+        <td class="member-parameter__attributes">
+          <p>&lt;optional&gt;</p>
+          
+          
+        </td>
+        <td class="member-parameter__default">
+          this.api
+        </td>
+        <td class="member-parameter__description"><p>API instance.</p></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  
+
+  
+    
+<div class="table-wrapper">
+  <table class="member-returns">
+    <caption class="member-returns__caption">Returns:</caption>
+    <thead class="member-returns__head">
+      <tr class="member-returns-header">
+        <th class="member-returns-header__type">Type</th>
+        <th class="member-returns-header__description">Description</th>
+      </tr>
+    </thead>
+    <tbody class="member-returns__body">
+      <tr class="member-return">
+        <td class="member-return__type">
+          Promise&lt;<a href="/nhentai-api/Search.html">Search</a>&gt;
+        </td>
+        <td class="member-return__description"><p>Next page search.</p></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  
+</div>
+
+  
+</div>
+
+    
+  </div>
+  <footer class="footer" id="footer-mount-point"></footer>
+</div>
+
+<hr class="page-r-divider" />
+<nav class="page-members-explorer">
+  <div class="page-members-explorer-category">
+    <section class="page-members-explorer-category__title">
+      Summary
+    </section>
+  </div>
+  
+
+<div class="page-members-explorer-category">
+  <section class="page-members-explorer-category__title">Public Properties</section>
+  <ul class="page-members-explorer-category__items">
+    
+      <li class="page-members-explorer__item"><a href=/nhentai-api/Search.html#api>api</a></li>
+    
+      <li class="page-members-explorer__item"><a href=/nhentai-api/Search.html#books>books</a></li>
+    
+      <li class="page-members-explorer__item"><a href=/nhentai-api/Search.html#page>page</a></li>
+    
+      <li class="page-members-explorer__item"><a href=/nhentai-api/Search.html#pages>pages</a></li>
+    
+      <li class="page-members-explorer__item"><a href=/nhentai-api/Search.html#perPage>perPage</a></li>
+    
+      <li class="page-members-explorer__item"><a href=/nhentai-api/Search.html#query>query</a></li>
+    
+  </ul>
+</div>
+
+  
+  
+
+<div class="page-members-explorer-category">
+  <section class="page-members-explorer-category__title">Public Methods</section>
+  <ul class="page-members-explorer-category__items">
+    
+      <li class="page-members-explorer__item"><a href=/nhentai-api/Search.html#parse>parse</a></li>
+    
+      <li class="page-members-explorer__item"><a href=/nhentai-api/Search.html#getNextPage>getNextPage</a></li>
+    
+  </ul>
+</div>
+
+  
+</nav>
+
+
+
+            <!-- footer in content -->
+          </div>
+        </div>
+      </article>
+      <script src="scripts/linenumber.js"> </script>
+    </body>
+  </div>
+</html>

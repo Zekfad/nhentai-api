@@ -86,11 +86,11 @@ declare class Tag {
      * @param {string}         [params.url=""]                Tag URL.
      */
     constructor({ id, type, name, count, url, }?: {
-        id: number;
-        type: string | TagType;
-        name: string;
-        count: number;
-        url: string;
+        id?: number;
+        type?: string | TagType;
+        name?: string;
+        count?: number;
+        url?: string;
     });
     /**
      * Tag ID.

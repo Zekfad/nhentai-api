@@ -1,8 +1,9 @@
+/// <reference types="node" />
 export default processOptions;
 /**
  * Agent-like object or Agent class or it's instance.
  */
-export type httpAgent = any;
+export type httpAgent = object | Agent | SSLAgent;
 /**
  * Common nHentai API hosts object.
  */
@@ -64,3 +65,5 @@ export type nHentaiOptions = {
  * @returns {nHentaiOptions} Unified options.
  */
 declare function processOptions({ hosts: { api, images, thumbs, }, ssl, agent, }?: nHentaiOptions): nHentaiOptions;
+import { Agent } from "http";
+import { Agent as SSLAgent } from "https";

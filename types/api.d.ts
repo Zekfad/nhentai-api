@@ -1,18 +1,5 @@
 export default API;
-export type nHentaiOptions = {
-    /**
-     * Hosts.
-     */
-    hosts: import("./options").nHentaiHosts;
-    /**
-     * Prefer HTTPS over HTTP.
-     */
-    ssl: boolean;
-    /**
-     * HTTP(S) agent.
-     */
-    agent: any;
-};
+export type nHentaiOptions = import("./options").nHentaiOptions;
 /**
  * API arguments
  */

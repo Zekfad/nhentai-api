@@ -94,7 +94,7 @@ class Search {
 		pages   = 1,
 		perPage = 0,
 		books   = [],
-	}) {
+	} = {}) {
 		if (Array.isArray(books))
 			books.forEach(this.pushBook.bind(this));
 

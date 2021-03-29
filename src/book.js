@@ -108,7 +108,7 @@ class Book {
 	/**
 	 * Book scanlator.
 	 * @type {string}
-	 * @default '''
+	 * @default ''
 	 */
 	scanlator = '';
 

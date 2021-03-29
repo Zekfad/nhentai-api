@@ -23,7 +23,10 @@ function formatMessages(messages) {
 	return `\n${errors.join('\n')}`;
 }
 
-describe.skip('ESLint', function () {
+// In dev mode we won't run ESLint as test phase.
+('dev' === (process.env.mode && process.env.mode.toLowerCase())
+	? describe.skip
+	: describe)('ESLint', function () {
 	this.timeout(2 * 60 * 1000);
 
 	let lintResults;

@@ -59,11 +59,11 @@ declare class Image {
      * @param {Book}             [params.book=Book.Unknown]    Image's Book.
      */
     constructor({ id, width, height, type, book, }?: {
-        id: number;
-        width: number;
-        height: number;
-        type: string | ImageType;
-        book: Book;
+        id?: number;
+        width?: number;
+        height?: number;
+        type?: string | ImageType;
+        book?: Book;
     });
     /**
      * Image ID.

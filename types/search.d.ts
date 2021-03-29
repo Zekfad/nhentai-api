@@ -44,11 +44,11 @@ declare class Search {
      * @param {Book[]} [params.books=[]]  Books array.
      */
     constructor({ query, page, pages, perPage, books, }?: {
-        query: string;
-        page: number;
-        pages: number;
-        perPage: number;
-        books: Book[];
+        query?: string;
+        page?: number;
+        pages?: number;
+        perPage?: number;
+        books?: Book[];
     });
     /**
      * API instance.

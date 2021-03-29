@@ -128,15 +128,15 @@ declare class Book {
      * @param {Image[]}   [params.pages=[]]     Book pages.
      */
     constructor({ title, id, media, favorites, scanlator, uploaded, tags, cover, pages, }?: {
-        title: BookTitle;
-        id: number;
-        media: number;
-        favorites: number;
-        scanlator: string;
-        uploaded: Date;
-        tags: Tag[];
-        cover: Image;
-        pages: Image[];
+        title?: BookTitle;
+        id?: number;
+        media?: number;
+        favorites?: number;
+        scanlator?: string;
+        uploaded?: Date;
+        tags?: Tag[];
+        cover?: Image;
+        pages?: Image[];
     });
     /**
      * Book title.
@@ -164,7 +164,7 @@ declare class Book {
     /**
      * Book scanlator.
      * @type {string}
-     * @default '''
+     * @default ''
      */
     scanlator: string;
     /**
@@ -241,4 +241,8 @@ import Image from "./image";
  * @extends Book
  */
 declare class UnknownBook extends Book {
+    /**
+     * Create unknown book.
+     */
+    constructor();
 }

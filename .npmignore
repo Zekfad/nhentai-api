@@ -35,8 +35,7 @@ test/
 
 # Development configs and utils
 **/.*ignore
-**/.*rc*
-**/.jsdoc*
+**/.rc*
 **/rollup.config.*
 **/.*.yml
 **/tsconfig.json
