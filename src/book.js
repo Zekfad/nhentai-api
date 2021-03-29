@@ -5,6 +5,7 @@
 import Image from './image';
 import Tag from './tag';
 
+
 /**
  * Book object from API.
  * @global
@@ -86,36 +87,42 @@ class Book {
 	/**
 	 * Book ID.
 	 * @type {number}
+	 * @default 0
 	 */
 	id = 0;
 
 	/**
 	 * Book Media ID.
 	 * @type {number}
+	 * @default 0
 	 */
 	media = 0;
 
 	/**
 	 * Book favours count.
 	 * @type {number}
+	 * @default 0
 	 */
 	favorites = 0;
 
 	/**
 	 * Book scanlator.
 	 * @type {string}
+	 * @default ''
 	 */
 	scanlator = '';
 
 	/**
 	 * Book upload date.
 	 * @type {Date}
+	 * @default new Date(0)
 	 */
 	uploaded = new Date(0);
 
 	/**
 	 * Book tags.
 	 * @type {Tag[]}
+	 * @default []
 	 */
 	tags = [];
 
@@ -128,6 +135,7 @@ class Book {
 	/**
 	 * Book pages.
 	 * @type {Image[]}
+	 * @default []
 	 */
 	pages = [];
 
@@ -239,10 +247,7 @@ class Book {
 	hasTag(tag, strict = true) {
 		tag = Tag.get(tag);
 
-		if (tag instanceof Tag) {
-			return this.tags.some(elem => elem.compare(tag, strict));
-		}
-		return false;
+		return this.tags.some(elem => elem.compare(tag, strict));
 	}
 
 	/**
@@ -250,7 +255,17 @@ class Book {
 	 * @param {object|Tag} tag Tag.
 	 */
 	hasTagWith(tag) {
-		return this.hasTag(tag, false);
+		return this.hasTag(tag, 'any');
+	}
+
+	/**
+	 * Get any tags with certain properties from book.
+	 * @param {object|Tag} tag Tag.
+	 */
+	getTagsWith(tag) {
+		tag = Tag.get(tag);
+
+		return this.tags.filter(elem => elem.compare(tag, 'any'));
 	}
 }
 

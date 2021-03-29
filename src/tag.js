@@ -33,6 +33,7 @@ class TagType {
 	/**
 	 * @type {TagTypes}
 	 * @static
+	 * @default {}
 	 */
 	static knownTypes = {};
 
@@ -137,6 +138,41 @@ class Tag {
 	}
 
 	/**
+	 * Tag ID.
+	 * @type {number}
+	 * @default 0
+	 */
+	id = 0;
+
+	/**
+	 * Tag type.
+	 * @type {TagType|UnknownTagType}
+	 * @default TagTypes.Unknown
+	 */
+	type = this.constructor.types.Unknown;
+
+	/**
+	 * Tag name.
+	 * @type {string}
+	 * @default ""
+	 */
+	name = '';
+
+	/**
+	 * Count of books tagged with this tag.
+	 * @type {number}
+	 * @default 0
+	 */
+	count = 0;
+
+	/**
+	 * Tag URL.
+	 * @type {string}
+	 * @default ""
+	 */
+	url = '';
+
+	/**
 	 * Create tag.
 	 * @param {object}         [params]                       Tag parameters.
 	 * @param {number}         [params.id=0]                  Tag id.
@@ -165,12 +201,18 @@ class Tag {
 
 	/**
 	 * Compare this to given one.
-	 * @param {string|Tag} tag            Tag to compare with.
-	 * @param {boolean}    [strict=false] Whatever all parameters must be the same.
+	 * By default tags with different id will return false.
+	 * If you want to check whatever tag has any of properties from another tag pass `'any'` to `strict` parameter.
+	 * @param {string|Tag} tag                Tag to compare with.
+	 * @param {boolean|string} [strict=false] Whatever all parameters must be the same.
 	 * @returns {boolean} Whatever tags are equal.
 	 */
 	compare(tag, strict = false) {
 		tag = this.constructor.get(tag);
+		if (strict === 'any')
+			strict = false;
+		else if (this.id !== tag.id)
+			return false;
 
 		return !![
 			'id',

@@ -2,16 +2,21 @@
  * @module API
  */
 
-import processOptions from './options';
+/**
+ * @typedef { import("./options").nHentaiOptions } nHentaiOptions
+ */
 
 import http from 'http';
 import https from 'https';
 
 import { version, } from '../package.json';
-import Search from './search';
+
 import Book from './book';
-import Tag from './tag';
 import Image from './image';
+import processOptions from './options';
+import Search from './search';
+import Tag from './tag';
+
 
 /**
  * API arguments
@@ -114,7 +119,7 @@ class API {
 	 * Applies provided options on top of defaults.
 	 * @param {nHentaiOptions} options Options to apply.
 	 */
-	constructor(options = {}) {
+	constructor(options) {
 		let params = processOptions(options);
 
 		Object.assign(this, params);
@@ -223,7 +228,11 @@ class API {
 				})
 			);
 
-		search.page = page;
+		Object.assign(search, {
+			api: this,
+			query,
+			page,
+		});
 
 		return search;
 	}
@@ -257,20 +266,21 @@ class API {
 	 * @async
 	 */
 	async searchTagged(tag, page = 1) {
+		if (!(tag instanceof Tag))
+			tag = Tag.get({ id: +tag, });
 		let { host, apiPath, } = this.getAPIArgs('api', 'searchTagged'),
 			search = Search.parse(
 				await this.request({
 					host,
-					path: apiPath(
-						tag instanceof Tag
-							? tag.id
-							: +tag,
-						page
-					),
+					path: apiPath(tag.id, page),
 				})
 			);
 
-		search.page = page;
+		Object.assign(search, {
+			api  : this,
+			query: tag,
+			page,
+		});
 
 		return search;
 	}

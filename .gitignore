@@ -35,5 +35,13 @@ bld/
 # Node
 node_modules/
 
-# Custom
-#dist/
+# Code coverage
+.nyc_output
+coverage/
+
+# Environment
+.env
+
+# Distribution
+**/dist/
+**/*.tgz
