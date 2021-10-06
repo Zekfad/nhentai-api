@@ -228,7 +228,7 @@ declare class Book {
      */
     hasTagWith(tag: object | Tag): boolean;
     /**
-     * Get any tags with certain properties from book.
+     * Get any tags with certain properties.
      * @param {object|Tag} tag Tag.
      */
     getTagsWith(tag: object | Tag): Tag[];

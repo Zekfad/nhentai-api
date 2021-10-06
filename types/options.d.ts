@@ -61,9 +61,9 @@ export type nHentaiOptions = {
  */
 /**
  * Applies provided options on top of defaults.
- * @param {nHentaiOptions} options Options to apply.
+ * @param {?nHentaiOptions} options Options to apply.
  * @returns {nHentaiOptions} Unified options.
  */
-declare function processOptions({ hosts: { api, images, thumbs, }, ssl, agent, }?: nHentaiOptions): nHentaiOptions;
+declare function processOptions({ hosts: { api, images, thumbs, }, ssl, agent, }?: nHentaiOptions | null): nHentaiOptions;
 import { Agent } from "http";
 import { Agent as SSLAgent } from "https";

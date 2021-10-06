@@ -1,5 +1,7 @@
 export default API;
 export type nHentaiOptions = import("./options").nHentaiOptions;
+export type nHentaiHosts = import("./options").nHentaiHosts;
+export type httpAgent = import("./options").httpAgent;
 /**
  * API arguments
  */
@@ -27,9 +29,24 @@ declare class API {
     private static APIPath;
     /**
      * Applies provided options on top of defaults.
-     * @param {nHentaiOptions} options Options to apply.
+     * @param {nHentaiOptions?} options Options to apply.
      */
-    constructor(options: nHentaiOptions);
+    constructor(options: nHentaiOptions | null);
+    /**
+     * Hosts
+     * @type {?nHentaiHosts}
+     */
+    hosts: nHentaiHosts | null;
+    /**
+     * Prefer HTTPS over HTTP.
+     * @type {?boolean}
+     */
+    ssl: boolean | null;
+    /**
+     * HTTP(S) agent.
+     * @property {?httpAgent}
+     */
+    agent: any;
     /**
      * Get http(s) module depending on `options.ssl`.
      * @type {https|http}

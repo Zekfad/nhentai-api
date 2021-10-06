@@ -6,6 +6,14 @@
  * @typedef { import("./options").nHentaiOptions } nHentaiOptions
  */
 
+/**
+ * @typedef { import("./options").nHentaiHosts } nHentaiHosts
+ */
+
+/**
+ * @typedef { import("./options").httpAgent } httpAgent
+ */
+
 import http from 'http';
 import https from 'https';
 
@@ -116,8 +124,26 @@ class API {
 	static APIPath = APIPath;
 
 	/**
+	 * Hosts
+	 * @type {?nHentaiHosts}
+	 */
+	hosts;
+
+	/**
+	 * Prefer HTTPS over HTTP.
+	 * @type {?boolean}
+	 */
+	ssl;
+
+	/**
+	 * HTTP(S) agent.
+	 * @property {?httpAgent}
+	 */
+	agent;
+
+	/**
 	 * Applies provided options on top of defaults.
-	 * @param {nHentaiOptions} options Options to apply.
+	 * @param {nHentaiOptions?} options Options to apply.
 	 */
 	constructor(options) {
 		let params = processOptions(options);

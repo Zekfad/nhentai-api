@@ -108,7 +108,7 @@ class Image {
 		PNG : new ImageType('png', 'png'),
 		GIF : new ImageType('gif', 'gif'),
 
-		Unknown: new UnknownImageType('unknwon', 'unknownExt'),
+		Unknown: new UnknownImageType('unknown', 'unknownExt'),
 
 		/**
 		 * Known image types.

@@ -259,7 +259,7 @@ class Book {
 	}
 
 	/**
-	 * Get any tags with certain properties from book.
+	 * Get any tags with certain properties.
 	 * @param {object|Tag} tag Tag.
 	 */
 	getTagsWith(tag) {
