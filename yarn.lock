@@ -616,10 +616,10 @@
   resolved "https://registry.yarnpkg.com/@webdoc/types/-/types-1.5.5.tgz#672a22afdf474b1ca23cdca862b62c9e56ca20e5"
   integrity sha512-XTHsivrEgjSmZM4M6KbdNyJ859et6ifEgKy7TfLMAYbpgpZx7bOagSdKB33S7YICTaxxBFrlPeklGJKfFB6lNg==
 
-"@zekfad/eslint-config@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@zekfad/eslint-config/-/eslint-config-1.0.1.tgz#241430b5ff480c6fa42408535b3fc8f76d16973b"
-  integrity sha512-6Sg3SlpsOp8jAjP6A8qcLKTKMBB7Nl7cjAZZBOyph9EvpS+DdD9SAYBnF7sn6DTYDBNx03VHM1hWohz0Tt6gAg==
+"@zekfad/eslint-config@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@zekfad/eslint-config/-/eslint-config-1.0.2.tgz#38573985e215c75fc2e4b91c1c943d122c2a2b2b"
+  integrity sha512-EdzYfaEFpL5aZ6g36ZCYCQkTj6llmrO98+5+ImikQVskEUyZ9RFnSkcM5fw+iVHtMThPFrSskXBy/UdG7DGywA==
 
 acorn-jsx@^5.3.1:
   version "5.3.2"

@@ -6,6 +6,7 @@ jobs:
   include:
   - name: Node 10
     node_js: 10
+    install: yarn install --frozen-lockfile --ignore-engines
   - name: Node 11
     node_js: 11
     install: yarn install --frozen-lockfile --ignore-engines
@@ -13,10 +14,13 @@ jobs:
     node_js: 12
   - name: Node 13
     node_js: 13
+    install: yarn install --frozen-lockfile --ignore-engines
   - name: Node 14
     node_js: 14
   - name: Node 15
     node_js: 15
+  - name: Node 16
+    node_js: 16
 #  - name: Latest Node - Windows
 #    node_js: node
 #    os: windows
