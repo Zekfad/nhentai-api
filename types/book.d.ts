@@ -233,7 +233,7 @@ declare class Book {
      */
     getTagsWith(tag: object | Tag): Tag[];
 }
-import Tag from "./tag";
+import { Tag } from "./tag";
 import Image from "./image";
 /**
  * Class representing unknown book.

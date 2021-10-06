@@ -230,4 +230,8 @@ class Tag {
 	}
 }
 
-export default Tag;
+export {
+	Tag,
+	TagType,
+	UnknownTagType,
+};

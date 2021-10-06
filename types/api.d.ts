@@ -117,5 +117,5 @@ declare class API {
 }
 import Search from "./search";
 import Book from "./book";
-import Tag from "./tag";
+import { Tag } from "./tag";
 import Image from "./image";

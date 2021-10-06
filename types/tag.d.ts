@@ -1,4 +1,3 @@
-export default Tag;
 /**
  * Tag object from API.
  */
@@ -62,7 +61,7 @@ export type TagTypes = {
  * Class representing tag.
  * @class
  */
-declare class Tag {
+export class Tag {
     /**
      * Tag types.
      * @type {TagTypes}
@@ -133,18 +132,6 @@ declare class Tag {
     compare(tag: string | Tag, strict?: boolean | string): boolean;
 }
 /**
- * Class representing unknown tag type.
- * @class
- * @extends TagType
- */
-declare class UnknownTagType extends TagType {
-    /**
-     * Create unknown tag type.
-     * @param {string} [type="unknown"] Unknown tag type name.
-     */
-    constructor(type?: string);
-}
-/**
  * @module Tag
  */
 /**
@@ -172,7 +159,7 @@ declare class UnknownTagType extends TagType {
  * Class representing tag type.
  * @class
  */
-declare class TagType {
+export class TagType {
     /**
      * @type {TagTypes}
      * @static
@@ -195,4 +182,16 @@ declare class TagType {
      * @type {boolean}
      */
     get isKnown(): boolean;
+}
+/**
+ * Class representing unknown tag type.
+ * @class
+ * @extends TagType
+ */
+export class UnknownTagType extends TagType {
+    /**
+     * Create unknown tag type.
+     * @param {string} [type="unknown"] Unknown tag type name.
+     */
+    constructor(type?: string);
 }

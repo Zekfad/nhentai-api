@@ -3,7 +3,7 @@
  */
 
 import Image from './image';
-import Tag from './tag';
+import { Tag, } from './tag';
 
 
 /**

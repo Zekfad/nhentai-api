@@ -5,7 +5,24 @@ const
 
 
 describe('Tag', () => {
-	const { Tag, } = nhentai;
+	const { Tag, TagTypes, } = nhentai;
+
+	describe('TagTypes', () => {
+
+		describe('props', () => {
+
+			for (const key in TagTypes)
+				if (Object.hasOwnProperty.call(TagTypes, key))
+					it(`TagTypes.${key} === Tag.types.${key}`, () => {
+						assert.strictEqual(
+							TagTypes[key],
+							Tag.types[key]
+						);
+					});
+
+		});
+
+	});
 
 	describe('#constructor', () => {
 

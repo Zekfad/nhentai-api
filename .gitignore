@@ -45,3 +45,6 @@ coverage/
 # Distribution
 **/dist/
 **/*.tgz
+
+# Webdoc artifacts
+/example.api.json

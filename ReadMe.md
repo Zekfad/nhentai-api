@@ -37,13 +37,13 @@ npm i nhentai-api
 #### CommonJS
 
 ```js
-const { API, } = require('nhentai-api');
+const { API, TagTypes, } = require('nhentai-api');
 ```
 
 #### ES6
 
 ```js
-import { API, } from 'nhentai-api';
+import { API, TagTypes, } from 'nhentai-api';
 ```
 
 ### Use
@@ -107,6 +107,6 @@ search.getNextPage(api);
 
 ```js
 book.getTagsWith({
-	type: Tag.types.Artist, // you may also use Tag.types.get('artist')
+	type: TagTypes.Artist, // you may also use Tag.types.get('artist') or Tag.types.Artist
 }) // Array<Tag>
 ```

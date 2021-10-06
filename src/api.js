@@ -23,7 +23,7 @@ import Book from './book';
 import Image from './image';
 import processOptions from './options';
 import Search from './search';
-import Tag from './tag';
+import { Tag, } from './tag';
 
 
 /**
