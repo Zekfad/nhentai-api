@@ -1,13 +1,14 @@
 import API from './api';
 import Book from './book';
 import Image from './image';
-import Search from './search';
+import { Search, SearchSort, } from './search';
 import { Tag, } from './tag';
 
 
 export {
 	API,
 	Search,
+	SearchSort,
 	Book,
 	Image,
 	Tag,

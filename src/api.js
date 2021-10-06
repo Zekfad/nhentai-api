@@ -14,6 +14,10 @@
  * @typedef { import("./options").httpAgent } httpAgent
  */
 
+/**
+ * @typedef { import("./search").SearchSortMode } SearchSortMode
+ */
+
 import http from 'http';
 import https from 'https';
 
@@ -22,7 +26,7 @@ import { version, } from '../package.json';
 import Book from './book';
 import Image from './image';
 import processOptions from './options';
-import Search from './search';
+import { Search, } from './search';
 import { Tag, } from './tag';
 
 
@@ -41,18 +45,19 @@ import { Tag, } from './tag';
 class APIPath {
 	/**
 	 * Search by query endpoint.
-	 * @param {string} query    Search query.
-	 * @param {number} [page=1] Page ID.
+	 * @param {string}          query     Search query.
+	 * @param {?number}         [page=1]  Page ID.
+	 * @param {?SearchSortMode} [sort=''] Search sort mode.
 	 * @returns {string} URL path.
 	 */
-	static search(query, page = 1) {
-		return `/api/galleries/search?query=${query}&page=${page}`;
+	static search(query, page = 1, sort = '') {
+		return `/api/galleries/search?query=${query}&page=${page}${sort ? '&sort=' + sort : ''}`;
 	}
 
 	/**
 	 * Search by tag endpoint.
-	 * @param {number} tagID    Tag ID.
-	 * @param {number} [page=1] Page ID.
+	 * @param {number}  tagID    Tag ID.
+	 * @param {?number} [page=1] Page ID.
 	 * @returns {string} URL path.
 	 */
 	static searchTagged(tagID, page = 1) {
@@ -240,17 +245,18 @@ class API {
 
 	/**
 	 * Search by query.
-	 * @param {string} query    Query.
-	 * @param {number} [page=1] Page ID.
+	 * @param {string}          query     Query.
+	 * @param {?number}         [page=1]  Page ID.
+	 * @param {?SearchSortMode} [sort=''] Search sort mode.
 	 * @returns {Promise<Search>} Search instance.
 	 * @async
 	 */
-	async search(query, page = 1) {
+	async search(query, page = 1, sort = '') {
 		let { host, apiPath, } = this.getAPIArgs('api', 'search'),
 			search = Search.parse(
 				await this.request({
 					host,
-					path: apiPath(query, page),
+					path: apiPath(query, page, sort),
 				})
 			);
 
@@ -258,6 +264,7 @@ class API {
 			api: this,
 			query,
 			page,
+			sort,
 		});
 
 		return search;
@@ -286,19 +293,20 @@ class API {
 
 	/**
 	 * Search by tag id.
-	 * @param {number|Tag} tag      Tag or Tag ID.
-	 * @param {number}     [page=1] Page ID.
+	 * @param {number|Tag}      tag       Tag or Tag ID.
+	 * @param {?number}         [page=1]  Page ID.
+	 * @param {?SearchSortMode} [sort=''] Search sort mode.
 	 * @returns {Promise<Search>} Search instance.
 	 * @async
 	 */
-	async searchTagged(tag, page = 1) {
+	async searchTagged(tag, page = 1, sort = '') {
 		if (!(tag instanceof Tag))
 			tag = Tag.get({ id: +tag, });
 		let { host, apiPath, } = this.getAPIArgs('api', 'searchTagged'),
 			search = Search.parse(
 				await this.request({
 					host,
-					path: apiPath(tag.id, page),
+					path: apiPath(tag.id, page, sort),
 				})
 			);
 
@@ -306,6 +314,7 @@ class API {
 			api  : this,
 			query: tag,
 			page,
+			sort,
 		});
 
 		return search;

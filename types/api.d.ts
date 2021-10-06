@@ -2,6 +2,7 @@ export default API;
 export type nHentaiOptions = import("./options").nHentaiOptions;
 export type nHentaiHosts = import("./options").nHentaiHosts;
 export type httpAgent = import("./options").httpAgent;
+export type SearchSortMode = import("./search").SearchSortMode;
 /**
  * API arguments
  */
@@ -74,12 +75,13 @@ declare class API {
     private getAPIArgs;
     /**
      * Search by query.
-     * @param {string} query    Query.
-     * @param {number} [page=1] Page ID.
+     * @param {string}          query     Query.
+     * @param {?number}         [page=1]  Page ID.
+     * @param {?SearchSortMode} [sort=''] Search sort mode.
      * @returns {Promise<Search>} Search instance.
      * @async
      */
-    search(query: string, page?: number): Promise<Search>;
+    search(query: string, page?: number | null, sort?: SearchSortMode | null): Promise<Search>;
     /**
      * Search related books.
      * @param {number|Book} book Book instance or Book ID.
@@ -89,12 +91,13 @@ declare class API {
     searchAlike(book: number | Book): Promise<Search>;
     /**
      * Search by tag id.
-     * @param {number|Tag} tag      Tag or Tag ID.
-     * @param {number}     [page=1] Page ID.
+     * @param {number|Tag}      tag       Tag or Tag ID.
+     * @param {?number}         [page=1]  Page ID.
+     * @param {?SearchSortMode} [sort=''] Search sort mode.
      * @returns {Promise<Search>} Search instance.
      * @async
      */
-    searchTagged(tag: number | Tag, page?: number): Promise<Search>;
+    searchTagged(tag: number | Tag, page?: number | null, sort?: SearchSortMode | null): Promise<Search>;
     /**
      * Get book by id.
      * @param {number} bookID Book ID.
@@ -115,7 +118,7 @@ declare class API {
      */
     getThumbURL(image: Image): string;
 }
-import Search from "./search";
+import { Search } from "./search";
 import Book from "./book";
 import { Tag } from "./tag";
 import Image from "./image";
