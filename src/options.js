@@ -1,6 +1,7 @@
 import { Agent, } from 'http';
 import { Agent as SSLAgent, } from 'https';
 
+
 /**
  * Agent-like object or Agent class or it's instance.
  * @global
@@ -27,7 +28,7 @@ import { Agent as SSLAgent, } from 'https';
 
 /**
  * Applies provided options on top of defaults.
- * @param {nHentaiOptions} options Options to apply.
+ * @param {?nHentaiOptions} options Options to apply.
  * @returns {nHentaiOptions} Unified options.
  */
 function processOptions({

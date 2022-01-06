@@ -33,6 +33,7 @@ class TagType {
 	/**
 	 * @type {TagTypes}
 	 * @static
+	 * @default {}
 	 */
 	static knownTypes = {};
 
@@ -60,6 +61,14 @@ class TagType {
 	 */
 	get isKnown() {
 		return !(this instanceof UnknownTagType);
+	}
+
+	/**
+	 * Tag type name.
+	 * @returns {string}
+	 */
+	toString() {
+		return this.type;
 	}
 }
 
@@ -114,7 +123,9 @@ class Tag {
 			let known;
 			if ('string' === typeof type)
 				type = type.toLowerCase();
-			return ((known = this.known[type])) ? known : new UnknownTagType(type);
+			return ((known = this.known[type]))
+				? known
+				: new UnknownTagType(type);
 		},
 	};
 
@@ -135,6 +146,41 @@ class Tag {
 			});
 		return tag;
 	}
+
+	/**
+	 * Tag ID.
+	 * @type {number}
+	 * @default 0
+	 */
+	id = 0;
+
+	/**
+	 * Tag type.
+	 * @type {TagType|UnknownTagType}
+	 * @default TagTypes.Unknown
+	 */
+	type = this.constructor.types.Unknown;
+
+	/**
+	 * Tag name.
+	 * @type {string}
+	 * @default ""
+	 */
+	name = '';
+
+	/**
+	 * Count of books tagged with this tag.
+	 * @type {number}
+	 * @default 0
+	 */
+	count = 0;
+
+	/**
+	 * Tag URL.
+	 * @type {string}
+	 * @default ""
+	 */
+	url = '';
 
 	/**
 	 * Create tag.
@@ -165,12 +211,18 @@ class Tag {
 
 	/**
 	 * Compare this to given one.
-	 * @param {string|Tag} tag            Tag to compare with.
-	 * @param {boolean}    [strict=false] Whatever all parameters must be the same.
+	 * By default tags with different id will return false.
+	 * If you want to check whatever tag has any of properties from another tag pass `'any'` to `strict` parameter.
+	 * @param {string|Tag} tag                Tag to compare with.
+	 * @param {boolean|string} [strict=false] Whatever all parameters must be the same.
 	 * @returns {boolean} Whatever tags are equal.
 	 */
 	compare(tag, strict = false) {
 		tag = this.constructor.get(tag);
+		if (strict === 'any')
+			strict = false;
+		else if (this.id !== tag.id)
+			return false;
 
 		return !![
 			'id',
@@ -186,6 +238,21 @@ class Tag {
 				: accum + current
 		);
 	}
+
+	/**
+	 * Get tag name or tag name with count of tagged books.
+	 * @param {?boolean} [includeCount=false] Include count.
+	 * @returns {string}
+	 */
+	toString(includeCount = false) {
+		return this.name + (includeCount
+			? ` (${this.count})`
+			: '');
+	}
 }
 
-export default Tag;
+export {
+	Tag,
+	TagType,
+	UnknownTagType,
+};

@@ -2,16 +2,33 @@
  * @module API
  */
 
-import processOptions from './options';
+/**
+ * @typedef { import("./options").nHentaiOptions } nHentaiOptions
+ */
+
+/**
+ * @typedef { import("./options").nHentaiHosts } nHentaiHosts
+ */
+
+/**
+ * @typedef { import("./options").httpAgent } httpAgent
+ */
+
+/**
+ * @typedef { import("./search").SearchSortMode } SearchSortMode
+ */
 
 import http from 'http';
 import https from 'https';
 
 import { version, } from '../package.json';
-import Search from './search';
+
 import Book from './book';
-import Tag from './tag';
 import Image from './image';
+import processOptions from './options';
+import { Search, } from './search';
+import { Tag, } from './tag';
+
 
 /**
  * API arguments
@@ -28,18 +45,19 @@ import Image from './image';
 class APIPath {
 	/**
 	 * Search by query endpoint.
-	 * @param {string} query    Search query.
-	 * @param {number} [page=1] Page ID.
+	 * @param {string}          query     Search query.
+	 * @param {?number}         [page=1]  Page ID.
+	 * @param {?SearchSortMode} [sort=''] Search sort mode.
 	 * @returns {string} URL path.
 	 */
-	static search(query, page = 1) {
-		return `/api/galleries/search?query=${query}&page=${page}`;
+	static search(query, page = 1, sort = '') {
+		return `/api/galleries/search?query=${query}&page=${page}${sort ? '&sort=' + sort : ''}`;
 	}
 
 	/**
 	 * Search by tag endpoint.
-	 * @param {number} tagID    Tag ID.
-	 * @param {number} [page=1] Page ID.
+	 * @param {number}  tagID    Tag ID.
+	 * @param {?number} [page=1] Page ID.
 	 * @returns {string} URL path.
 	 */
 	static searchTagged(tagID, page = 1) {
@@ -111,10 +129,28 @@ class API {
 	static APIPath = APIPath;
 
 	/**
-	 * Applies provided options on top of defaults.
-	 * @param {nHentaiOptions} options Options to apply.
+	 * Hosts
+	 * @type {?nHentaiHosts}
 	 */
-	constructor(options = {}) {
+	hosts;
+
+	/**
+	 * Prefer HTTPS over HTTP.
+	 * @type {?boolean}
+	 */
+	ssl;
+
+	/**
+	 * HTTP(S) agent.
+	 * @property {?httpAgent}
+	 */
+	agent;
+
+	/**
+	 * Applies provided options on top of defaults.
+	 * @param {nHentaiOptions?} options Options to apply.
+	 */
+	constructor(options) {
 		let params = processOptions(options);
 
 		Object.assign(this, params);
@@ -209,23 +245,47 @@ class API {
 
 	/**
 	 * Search by query.
-	 * @param {string} query    Query.
-	 * @param {number} [page=1] Page ID.
+	 * @param {string}          query     Query.
+	 * @param {?number}         [page=1]  Page ID.
+	 * @param {?SearchSortMode} [sort=''] Search sort mode.
 	 * @returns {Promise<Search>} Search instance.
 	 * @async
 	 */
-	async search(query, page = 1) {
+	async search(query, page = 1, sort = '') {
 		let { host, apiPath, } = this.getAPIArgs('api', 'search'),
 			search = Search.parse(
 				await this.request({
 					host,
-					path: apiPath(query, page),
+					path: apiPath(query, page, sort),
 				})
 			);
 
-		search.page = page;
+		Object.assign(search, {
+			api: this,
+			query,
+			page,
+			sort,
+		});
 
 		return search;
+	}
+
+	/**
+	 * Search by query.
+	 * @param {string}          query     Query.
+	 * @param {?number}         [page=1]  Starting page ID.
+	 * @param {?SearchSortMode} [sort=''] Search sort mode.
+	 * @yields {Search} Search instance.
+	 * @async
+	 * @returns {AsyncGenerator<Search, Search, Search>}
+	 */
+	async * searchGenerator(query, page = 1, sort = '') {
+		let search = await this.search(query, page, sort);
+
+		while (search.page <= search.pages) {
+			yield search;
+			search = await this.search(query, search.page + 1, sort);
+		}
 	}
 
 	/**
@@ -251,26 +311,29 @@ class API {
 
 	/**
 	 * Search by tag id.
-	 * @param {number|Tag} tag      Tag or Tag ID.
-	 * @param {number}     [page=1] Page ID.
+	 * @param {number|Tag}      tag       Tag or Tag ID.
+	 * @param {?number}         [page=1]  Page ID.
+	 * @param {?SearchSortMode} [sort=''] Search sort mode.
 	 * @returns {Promise<Search>} Search instance.
 	 * @async
 	 */
-	async searchTagged(tag, page = 1) {
+	async searchTagged(tag, page = 1, sort = '') {
+		if (!(tag instanceof Tag))
+			tag = Tag.get({ id: +tag, });
 		let { host, apiPath, } = this.getAPIArgs('api', 'searchTagged'),
 			search = Search.parse(
 				await this.request({
 					host,
-					path: apiPath(
-						tag instanceof Tag
-							? tag.id
-							: +tag,
-						page
-					),
+					path: apiPath(tag.id, page, sort),
 				})
 			);
 
-		search.page = page;
+		Object.assign(search, {
+			api  : this,
+			query: tag,
+			page,
+			sort,
+		});
 
 		return search;
 	}

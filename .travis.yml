@@ -1,0 +1,36 @@
+language: node_js
+os: linux
+dist: xenial
+install: yarn install --frozen-lockfile --ignore-engines
+before_script: yarn build
+jobs:
+  include:
+  # - name: Node 10
+  #   node_js: 10
+  #   before_script: yarn build:src
+  # - name: Node 11
+  #   node_js: 11
+  #   before_script: yarn build:src
+  - name: Node 12
+    node_js: 12
+  - name: Node 13
+    node_js: 13
+  - name: Node 14
+    node_js: 14
+  - name: Node 15
+    node_js: 15
+  - name: Node 16
+    node_js: 16
+  # - name: Latest Node - Windows
+  #   node_js: node
+  #   os: windows
+  - name: Latest Node - OSX
+    node_js: node
+    before_install: npm install -g yarn
+    os: osx
+  - name: Latest Node - Linux
+    node_js: node
+    os: linux
+    env:
+      - mode=dev
+    after_success: yarn run coverage

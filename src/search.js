@@ -2,7 +2,10 @@
  * @module Search
  */
 
+import API from './api';
 import Book from './book';
+import { Tag, } from './tag';
+
 
 /**
  * Search object from API.
@@ -13,6 +16,38 @@ import Book from './book';
  * @property {number|string} per_page  Number of books per page.
  */
 
+
+/**
+ * @typedef {''|'popular'|'popular-week'|'popular-today'|'popular-month'} SearchSortMode
+ */
+
+class SearchSort {
+	/**
+	 * @type {SearchSortMode}
+	 */
+	static Recent = '';
+	/**
+	 * @type {SearchSortMode}
+	 */
+	static Popular = 'popular';
+	/**
+	 * @type {SearchSortMode}
+	 */
+	static PopularMonth = 'popular-month';
+	/**
+	 * @type {SearchSortMode}
+	 */
+	static PopularWeek = 'popular-week';
+	/**
+	 * @type {SearchSortMode}
+	 */
+	static PopularToday = 'poplar-today';
+}
+
+/**
+ * Class representing search request results.
+ * @class
+ */
 class Search {
 	/**
 	 * Parse search object into class instance.
@@ -31,47 +66,78 @@ class Search {
 	}
 
 	/**
+	 * API instance.
+	 * @type {?API}
+	 * @default null
+	 */
+	api = null;
+
+	/**
+	 * Query string.
+	 * @type {?string}
+	 * @default null
+	 */
+	query = null;
+
+	/**
+	 * Search sort mode.
+	 * @type {SearchSortMode}
+	 * @default ''
+	 */
+	sort = '';
+
+	/**
 	 * Page ID.
 	 * @type {number}
+	 * @default 1
 	 */
 	page = 1;
 
 	/**
 	 * Books per page.
 	 * @type {number}
+	 * @default 0
 	 */
 	perPage = 0;
 
 	/**
 	 * Books array.
 	 * @type {Book[]}
+	 * @default []
 	 */
 	books = [];
 
 	/**
 	 * Pages count.
 	 * @type {number}
+	 * @default 1
 	 */
 	pages = 1;
 
 	/**
 	 * Create search.
-	 * @param {object} [params]           Search parameters.
-	 * @param {number} [params.page=1]    Search page ID.
-	 * @param {number} [params.pages=1]   Search pages count.
-	 * @param {number} [params.perPage=0] Search books per page.
-	 * @param {Book[]} [params.books=[]]  Books array.
+	 * @param {?object}         [params]           Search parameters.
+	 * @param {?string}         [params.query='']  Query string.
+	 * @param {?SearchSortMode} [params.sort='']   Search sort mode.
+	 * @param {?number}         [params.page=1]    Search page ID.
+	 * @param {?number}         [params.pages=1]   Search pages count.
+	 * @param {?number}         [params.perPage=0] Search books per page.
+	 * @param {?Book[]}         [params.books=[]]  Books array.
 	 */
 	constructor({
+		query   = null,
+		sort    = '',
 		page    = 1,
 		pages   = 1,
 		perPage = 0,
 		books   = [],
-	}) {
+	} = {}) {
 		if (Array.isArray(books))
 			books.forEach(this.pushBook.bind(this));
 
 		Object.assign(this, {
+			query,
+			sort,
 			page,
 			pages,
 			perPage,
@@ -80,9 +146,9 @@ class Search {
 
 	/**
 	 * Push book to books array.
-	 * @private
 	 * @param {Book} book Book.
 	 * @returns {boolean} Whatever was book added or not.
+	 * @private
 	 */
 	pushBook(book) {
 		if (book instanceof Book) {
@@ -91,6 +157,27 @@ class Search {
 		}
 		return false;
 	}
+
+	/**
+	 * Request next page.
+	 * @throws Error if search request can't be paginated.
+	 * @throws Error if `api` is missing as instance property or function argument.
+	 * @param {API} [api=this.api] API instance.
+	 * @returns {Promise<Search>} Next page search.
+	 */
+	getNextPage(api = this.api) {
+		let { query, page, sort, } = this;
+		if (query === null)
+			throw Error('pagination impossible.');
+		if (!(api instanceof API))
+			throw Error('api must exists.');
+		return query instanceof Tag
+			? api.searchTagged(query, page + 1, sort)
+			: api.search(query, page + 1, sort);
+	}
 }
 
-export default Search;
+export {
+	Search,
+	SearchSort,
+};

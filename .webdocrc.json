@@ -1,0 +1,20 @@
+{
+	"source": {
+		"include": "src/",
+		"excludePattern": "(node_modules|types|test|dist|coverage)"
+	},
+	"plugins": [
+		"plugins/markdown"
+	],
+	"opts": {
+		"encoding": "utf8",
+		"recurse": true,
+		"lenient": true,
+		"destination": "docs"
+	},
+	"template": {
+		"repository": "https://github.com/Zekfad/nhentai-api",
+		"readme": "./README.md",
+		"outputSourceFiles": true
+	}
+}

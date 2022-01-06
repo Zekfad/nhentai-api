@@ -17,6 +17,7 @@ import Book from './book';
  * @typedef {object} ImageTypes
  * @property {TagType} JPEG JPEG image type.
  * @property {TagType} PNG  PNG image type.
+ * @property {TagType} GIF  GIF image type.
  */
 
 /**
@@ -27,18 +28,21 @@ class ImageType {
 	/**
 	 * @type {ImageTypes}
 	 * @static
+	 * @default {}
 	 */
 	static knownTypes = {};
 
 	/**
 	 * Image type name.
 	 * @type {?string}
+	 * @default null
 	 */
 	type = null;
 
 	/**
 	 * Image type extension.
 	 * @type {?string}
+	 * @default null
 	 */
 	extension = null;
 
@@ -61,6 +65,14 @@ class ImageType {
 	 */
 	get isKnown() {
 		return !(this instanceof UnknownImageType);
+	}
+
+	/**
+	 * Alias for type.
+	 * @type {?string}
+	 */
+	get name() {
+		return this.type;
 	}
 }
 
@@ -94,6 +106,9 @@ class Image {
 	static types = {
 		JPEG: new ImageType('jpeg', 'jpg'),
 		PNG : new ImageType('png', 'png'),
+		GIF : new ImageType('gif', 'gif'),
+
+		Unknown: new UnknownImageType('unknown', 'unknownExt'),
 
 		/**
 		 * Known image types.
@@ -120,9 +135,15 @@ class Image {
 					case 'png':
 						type = 'png';
 						break;
+					case 'g':
+					case 'gif':
+						type = 'gif';
+						break;
 				}
 			}
-			return ((known = this.known[type])) ? known : new UnknownImageType(type);
+			return ((known = this.known[type]))
+				? known
+				: new UnknownImageType(type);
 		},
 	};
 
@@ -151,30 +172,35 @@ class Image {
 	/**
 	 * Image ID.
 	 * @type {number}
+	 * @default 0
 	 */
 	id = 0;
 
 	/**
 	 * Image width.
 	 * @type {number}
+	 * @default 0
 	 */
 	width = 0;
 
 	/**
 	 * Image height.
 	 * @type {number}
+	 * @default 0
 	 */
 	height = 0;
 
 	/**
 	 * Image type.
 	 * @type {ImageType}
+	 * @default ImageTypes.JPEG
 	 */
 	type = this.constructor.types.JPEG;
 
 	/**
 	 * Image parent book.
 	 * @type {Book}
+	 * @default Book.Unknown
 	 */
 	book = Book.Unknown;
 
