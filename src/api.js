@@ -387,7 +387,7 @@ class API {
 			const response = error.httpResponse;
 			if (!response || response.statusCode !== 302)
 				throw error;
-			const id = +((/\d+/).exec(response.headers.location) ?? {})[0];
+			const id = +((/\d+/).exec(response.headers.location) || {})[0];
 			if (isNaN(id))
 				throw APIError.absorb(new Error('Bad redirect'), response);
 			return await this.getBook(id);
