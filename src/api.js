@@ -18,12 +18,14 @@
  * @typedef { import("./search").SearchSortMode } SearchSortMode
  */
 
-import http from 'http';
+// eslint-disable-next-line no-unused-vars
+import http, { IncomingMessage, } from 'http';
 import https from 'https';
 
 import { version, } from '../package.json';
 
 import Book from './book';
+import APIError from './error';
 import Image from './image';
 import processOptions from './options';
 import { Search, } from './search';
@@ -113,6 +115,14 @@ class APIPath {
 	static bookThumb(mediaID, page, extension) {
 		return `/galleries/${mediaID}/${page}t.${extension}`;
 	}
+
+	/**
+	 * Redirect to random book at website.
+	 * @returns {string} URL path.
+	 */
+	static randomBookRedirect() {
+		return '/random/';
+	}
 }
 
 /**
@@ -186,8 +196,10 @@ class API {
 				},
 			});
 
-			net.get(options, response => {
+			net.get(options, _response => {
 				const
+					/** @type {IncomingMessage}*/
+					response = _response,
 					{ statusCode, } = response,
 					contentType = response.headers['content-type'];
 
@@ -199,7 +211,7 @@ class API {
 
 				if (error) {
 					response.resume();
-					reject(error);
+					reject(APIError.absorb(error, response));
 					return;
 				}
 
@@ -210,10 +222,10 @@ class API {
 					try {
 						resolve(JSON.parse(rawData));
 					} catch (error) {
-						reject(error);
+						reject(APIError.absorb(error, response));
 					}
 				});
-			}).on('error', error => reject(error));
+			}).on('error', error => reject(APIError.absorb(error)));
 		});
 	}
 
@@ -353,6 +365,33 @@ class API {
 				path: apiPath(bookID),
 			})
 		);
+	}
+
+	/**
+	 * Get book by id.
+	 * @param {number} bookID Book ID.
+	 * @returns {Promise<Book>} Book instance.
+	 * @async
+	 */
+	async getRandomBook() {
+		let { host, apiPath, } = this.getAPIArgs('api', 'randomBookRedirect');
+
+		try {
+			await this.request({
+				host,
+				path: apiPath(),
+			}); // Will always throw
+		} catch (error) {
+			if (!(error instanceof APIError))
+				throw error;
+			const response = error.httpResponse;
+			if (!response || response.statusCode !== 302)
+				throw error;
+			const id = +((/\d+/).exec(response.headers.location) ?? {})[0];
+			if (isNaN(id))
+				throw APIError.absorb(new Error('Bad redirect'), response);
+			return await this.getBook(id);
+		}
 	}
 
 	/**

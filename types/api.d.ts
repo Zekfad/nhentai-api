@@ -116,6 +116,13 @@ declare class API {
      */
     getBook(bookID: number): Promise<Book>;
     /**
+     * Get book by id.
+     * @param {number} bookID Book ID.
+     * @returns {Promise<Book>} Book instance.
+     * @async
+     */
+    getRandomBook(): Promise<Book>;
+    /**
      * Get image URL.
      * @param {Image} image Image.
      * @returns {string} Image URL.

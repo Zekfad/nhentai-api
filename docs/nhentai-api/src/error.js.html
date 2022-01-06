@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>{ <i>webdoc</i> }: index.js</title>
+    <title>{ <i>webdoc</i> }: error.js</title>
 
     
 
@@ -190,40 +190,85 @@
             <a href="#34">34</a>
           </li>
         
+          <li id="35">
+            <a href="#35">35</a>
+          </li>
+        
+          <li id="36">
+            <a href="#36">36</a>
+          </li>
+        
+          <li id="37">
+            <a href="#37">37</a>
+          </li>
+        
+          <li id="38">
+            <a href="#38">38</a>
+          </li>
+        
+          <li id="39">
+            <a href="#39">39</a>
+          </li>
+        
+          <li id="40">
+            <a href="#40">40</a>
+          </li>
+        
+          <li id="41">
+            <a href="#41">41</a>
+          </li>
+        
+          <li id="42">
+            <a href="#42">42</a>
+          </li>
+        
+          <li id="43">
+            <a href="#43">43</a>
+          </li>
+        
       </ul>
-      <pre><code><span class="hljs-keyword">import</span> API <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./api&#x27;</span>;
-<span class="hljs-keyword">import</span> Book <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./book&#x27;</span>;
-<span class="hljs-keyword">import</span> Image <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./image&#x27;</span>;
-<span class="hljs-keyword">import</span> { <span class="hljs-keyword">Search</span>, SearchSort, } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./search&#x27;</span>;
-<span class="hljs-keyword">import</span> { Tag, } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./tag&#x27;</span>;
+      <pre><code><span class="hljs-comment">// eslint-disable-next-line no-unused-vars</span>
+<span class="hljs-keyword">import</span> { IncomingMessage, } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;http&#x27;</span>;
 
 
-export {
-	API,
-	<span class="hljs-keyword">Search</span>,
-	SearchSort,
-	Book,
-	Image,
-	Tag,
-};
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">APIError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Error</span> </span>{
+	<span class="hljs-comment">/**
+	 * Original error.
+	 * <span class="hljs-doctag">@type <span class="hljs-type">{?Error}</span></span>
+	 * <span class="hljs-doctag">@default <span class="hljs-variable">null</span></span>
+	 */</span>
+	originalError = <span class="hljs-literal">null</span>;
 
-<span class="hljs-comment">/**
- * @typedef { import(&quot;./tag&quot;).TagTypes } TagTypes
- */</span>
+	<span class="hljs-comment">/**
+	 * HTTP response.
+	 * <span class="hljs-doctag">@type <span class="hljs-type">{IncomingMessage}</span></span>
+	 * <span class="hljs-doctag">@default <span class="hljs-variable">null</span></span>
+	 */</span>
+	httpResponse = <span class="hljs-literal">null</span>;
 
-<span class="hljs-comment">/**
- * @type {TagTypes}
- */</span>
-export const TagTypes = {
-	<span class="hljs-type">Unknown</span>  : Tag.<span class="hljs-keyword">types</span>.Unknown,
-	Tag      : Tag.<span class="hljs-keyword">types</span>.Tag,
-	Category : Tag.<span class="hljs-keyword">types</span>.Category,
-	Artist   : Tag.<span class="hljs-keyword">types</span>.Artist,
-	Parody   : Tag.<span class="hljs-keyword">types</span>.Parody,
-	<span class="hljs-type">Character</span>: Tag.<span class="hljs-keyword">types</span>.Character,
-	<span class="hljs-keyword">Group</span>    : Tag.<span class="hljs-keyword">types</span>.<span class="hljs-keyword">Group</span>,
-	<span class="hljs-keyword">Language</span> : Tag.<span class="hljs-keyword">types</span>.<span class="hljs-keyword">Language</span>,
-};
+	<span class="hljs-comment">/**
+	 * Error message.
+	 * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> </span>message Message.
+	 */</span>
+	<span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">message = <span class="hljs-string">&#x27;Unknown error&#x27;</span></span>)</span> {
+		<span class="hljs-built_in">super</span>(message);
+	}
+
+	<span class="hljs-comment">/**
+	 * Absorb error.
+	 * <span class="hljs-doctag">@param <span class="hljs-type">{Error}</span> </span>[error=null] Original error.
+	 * <span class="hljs-doctag">@param <span class="hljs-type">{?IncomingMessage}</span> </span>[httpResponse=null] HTTP response.
+	 * <span class="hljs-doctag">@returns <span class="hljs-type">{APIError}</span></span>
+	 */</span>
+	<span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-title">absorb</span>(<span class="hljs-params">error, httpResponse = <span class="hljs-literal">null</span></span>)</span> {
+		<span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign(<span class="hljs-keyword">new</span> APIError(error.message), {
+			<span class="hljs-attr">originalError</span>: error,
+			httpResponse,
+		});
+	}
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> APIError;
 </code></pre>
     </div>
   </div>
