@@ -1,16 +1,18 @@
-import babel from 'rollup-plugin-babel';
-import babelProposalClassProperties from '@babel/plugin-proposal-class-properties';
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import json from '@rollup/plugin-json';
-import { terser, } from 'rollup-plugin-terser';
 import {
 	resolve as resolvePath,
 	join as joinPath,
 } from 'path';
 
+import babelProposalClassProperties from '@babel/plugin-proposal-class-properties';
+import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
+import resolve from '@rollup/plugin-node-resolve';
+
 
 import MagicString from 'magic-string';
+import babel from 'rollup-plugin-babel';
+import { terser, } from 'rollup-plugin-terser';
+
 
 const
 	srcDir = resolvePath('./src'),
@@ -88,7 +90,6 @@ if (!('dev' === (process.env.mode && process.env.mode.toLowerCase())))
 			output: {
 				comments: 'all',
 			},
-			sourcemap      : true,
 			mangle         : false,
 			keep_classnames: true,
 			keep_fnames    : true,

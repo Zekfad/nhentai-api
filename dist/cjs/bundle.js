@@ -1,30 +1,4 @@
-"use strict";function _interopDefault(ex){return ex&&"object"==typeof ex&&"default"in ex?ex.default:ex}Object.defineProperty(exports,"__esModule",{value:!0});var http=require("http"),http__default=_interopDefault(http),https=require("https"),https__default=_interopDefault(https);function _defineProperty(obj,key,value){return key in obj?Object.defineProperty(obj,key,{value:value,enumerable:!0,configurable:!0,writable:!0}):obj[key]=value,obj}
-/**
- * Agent-like object or Agent class or it's instance.
- * @global
- * @typedef {object|Agent|SSLAgent} httpAgent
- */
-/**
- * Common nHentai API hosts object.
- * @global
- * @typedef {object} nHentaiHosts
- * @property {?string} api    Main API host.
- * @property {?string} images Media API host.
- * @property {?string} thumbs Media thumbnails API host.
- */
-/**
- * Common nHentai options object.
- * @global
- * @typedef {object} nHentaiOptions
- * @property {?nHentaiHosts} hosts Hosts.
- * @property {?boolean}      ssl   Prefer HTTPS over HTTP.
- * @property {?httpAgent}    agent HTTP(S) agent.
- */
-/**
- * Applies provided options on top of defaults.
- * @param {nHentaiOptions} options Options to apply.
- * @returns {nHentaiOptions} Unified options.
- */
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var http=require("http"),https=require("https");function _interopDefaultLegacy(e){return e&&"object"==typeof e&&"default"in e?e:{default:e}}var http__default=_interopDefaultLegacy(http),https__default=_interopDefaultLegacy(https);function _defineProperty(obj,key,value){return key in obj?Object.defineProperty(obj,key,{value:value,enumerable:!0,configurable:!0,writable:!0}):obj[key]=value,obj}
 /**
  * Image object from API.
  * @global
@@ -37,6 +11,7 @@
  * @typedef {object} ImageTypes
  * @property {TagType} JPEG JPEG image type.
  * @property {TagType} PNG  PNG image type.
+ * @property {TagType} GIF  GIF image type.
  */
 /**
  * Class representing image type.
@@ -113,7 +88,7 @@ static parse(image,id=0){let{t:type,w:width,h:height}=image;return new this({typ
 /**
    * Image filename.
    * @type {string}
-   */get filename(){return`${this.isCover?"cover":this.id}.${this.type.extension}`}}_defineProperty(Image,"types",{JPEG:new ImageType("jpeg","jpg"),PNG:new ImageType("png","png"),
+   */get filename(){return`${this.isCover?"cover":this.id}.${this.type.extension}`}}_defineProperty(Image,"types",{JPEG:new ImageType("jpeg","jpg"),PNG:new ImageType("png","png"),GIF:new ImageType("gif","gif"),
 /**
    * Known image types.
    * @type {ImageType}
@@ -124,7 +99,7 @@ known:ImageType.knownTypes,
    * @param {string} type Image type.
    * @returns {ImageType|UnknownImageType} Image type class instance.
    */
-get(type){let known;if("string"==typeof type)switch(type=type.toLowerCase()){case"j":case"jpg":case"jpeg":type="jpeg";break;case"p":case"png":type="png"}return(known=this.known[type])?known:new UnknownImageType(type)}});
+get(type){let known;if("string"==typeof type)switch(type=type.toLowerCase()){case"j":case"jpg":case"jpeg":type="jpeg";break;case"p":case"png":type="png";break;case"g":case"gif":type="gif"}return(known=this.known[type])?known:new UnknownImageType(type)}});
 /**
  * @module Tag
  */
@@ -212,7 +187,7 @@ static get(tag){return tag instanceof this||(tag=new this({id:+tag.id,type:tag.t
    * @param {string|Tag} tag            Tag to compare with.
    * @param {boolean}    [strict=false] Whatever all parameters must be the same.
    * @returns {boolean} Whatever tags are equal.
-   */compare(tag,strict=!1){return tag=this.constructor.get(tag),!!["id","type","name","count","url"].map(prop=>tag[prop]===this[prop]).reduce((accum,current)=>strict?accum*current:accum+current)}}_defineProperty(Tag,"types",{Unknown:new UnknownTagType,
+   */compare(tag,strict=!1){return tag=this.constructor.get(tag),!!["id","type","name","count","url"].map((prop=>tag[prop]===this[prop])).reduce(((accum,current)=>strict?accum*current:accum+current))}}_defineProperty(Tag,"types",{Unknown:new UnknownTagType,
 // Symbol('unknown')
 Tag:new TagType("tag"),Category:new TagType("category"),Artist:new TagType("artist"),Parody:new TagType("parody"),Character:new TagType("character"),Group:new TagType("group"),Language:new TagType("language"),
 /**
@@ -272,7 +247,7 @@ class Book{
    * @returns {Book} Book instance.
    * @static
    */
-static parse(book){return new this({title:book.title,id:+book.id,media:+book.media_id,favorites:+book.num_favorites,scanlator:book.scanlator,uploaded:new Date(1e3*+book.upload_date),tags:book.tags.map(tag=>new Tag(tag)),cover:Image.parse(book.images.cover),pages:book.images.pages.map((image,id)=>Image.parse(image,++id))})}
+static parse(book){return new this({title:book.title,id:+book.id,media:+book.media_id,favorites:+book.num_favorites,scanlator:book.scanlator,uploaded:new Date(1e3*+book.upload_date),tags:book.tags.map((tag=>new Tag(tag))),cover:Image.parse(book.images.cover),pages:book.images.pages.map(((image,id)=>Image.parse(image,++id)))})}
 /**
    * Book title.
    * @type {BookTitle}
@@ -316,7 +291,7 @@ static parse(book){return new this({title:book.title,id:+book.id,media:+book.med
    * Check if book has certain tag.
    * @param {Tag}     tag            Tag
    * @param {boolean} [strict=false] Strict comparison.
-   */hasTag(tag,strict=!0){return(tag=Tag.get(tag))instanceof Tag&&this.tags.some(elem=>elem.compare(tag,strict))}
+   */hasTag(tag,strict=!0){return(tag=Tag.get(tag))instanceof Tag&&this.tags.some((elem=>elem.compare(tag,strict)))}
 /**
    * Check if book has any tags with certain properties.
    * @param {object|Tag} tag Tag.
@@ -388,18 +363,45 @@ class API{
    * Applies provided options on top of defaults.
    * @param {nHentaiOptions} options Options to apply.
    */
-constructor(options={}){let params=function processOptions({hosts:{api:api="nhentai.net",images:images="i.nhentai.net",thumbs:thumbs="t.nhentai.net"}={},ssl:ssl=!0,agent:agent=null}={}){return agent||(agent=ssl?https.Agent:http.Agent),"Function"===agent.constructor.name&&(agent=new agent),{hosts:{api:api,images:images,thumbs:thumbs},ssl:ssl,agent:agent}}(options);Object.assign(this,params)}
+constructor(options={}){let params=
+/**
+ * Agent-like object or Agent class or it's instance.
+ * @global
+ * @typedef {object|Agent|SSLAgent} httpAgent
+ */
+/**
+ * Common nHentai API hosts object.
+ * @global
+ * @typedef {object} nHentaiHosts
+ * @property {?string} api    Main API host.
+ * @property {?string} images Media API host.
+ * @property {?string} thumbs Media thumbnails API host.
+ */
+/**
+ * Common nHentai options object.
+ * @global
+ * @typedef {object} nHentaiOptions
+ * @property {?nHentaiHosts} hosts Hosts.
+ * @property {?boolean}      ssl   Prefer HTTPS over HTTP.
+ * @property {?httpAgent}    agent HTTP(S) agent.
+ */
+/**
+ * Applies provided options on top of defaults.
+ * @param {nHentaiOptions} options Options to apply.
+ * @returns {nHentaiOptions} Unified options.
+ */
+function processOptions({hosts:{api:api="nhentai.net",images:images="i.nhentai.net",thumbs:thumbs="t.nhentai.net"}={},ssl:ssl=!0,agent:agent=null}={}){return agent||(agent=ssl?https.Agent:http.Agent),"Function"===agent.constructor.name&&(agent=new agent),{hosts:{api:api,images:images,thumbs:thumbs},ssl:ssl,agent:agent}}(options);Object.assign(this,params)}
 /**
    * Get http(s) module depending on `options.ssl`.
    * @type {https|http}
-   */get net(){return this.ssl?https__default:http__default}
+   */get net(){return this.ssl?https__default.default:http__default.default}
 /**
    * JSON get request.
    * @param {object} options      HTTP(S) request options.
    * @param {string} options.host Host.
    * @param {string} options.path Path.
    * @returns {Promise<object>} Parsed JSON.
-   */request(options){let{net:net,agent:agent}=this;return new Promise((resolve,reject)=>{Object.assign(options,{agent:agent,headers:{"User-Agent":`nhentai-api-client/3.0.2 Node.js/${process.versions.node}`}}),net.get(options,response=>{const{statusCode:statusCode}=response,contentType=response.headers["content-type"];let error;if(200!==statusCode?error=new Error(`Request failed with status code ${statusCode}`):/^application\/json/.test(contentType)||(error=new Error(`Invalid content-type - expected application/json but received ${contentType}`)),error)return response.resume(),void reject(error);response.setEncoding("utf8");let rawData="";response.on("data",chunk=>rawData+=chunk),response.on("end",()=>{try{resolve(JSON.parse(rawData))}catch(error){reject(error)}})}).on("error",error=>reject(error))})}
+   */request(options){let{net:net,agent:agent}=this;return new Promise(((resolve,reject)=>{Object.assign(options,{agent:agent,headers:{"User-Agent":`nhentai-api-client/3.0.3 Node.js/${process.versions.node}`}}),net.get(options,(response=>{const{statusCode:statusCode}=response,contentType=response.headers["content-type"];let error;if(200!==statusCode?error=new Error(`Request failed with status code ${statusCode}`):/^application\/json/.test(contentType)||(error=new Error(`Invalid content-type - expected application/json but received ${contentType}`)),error)return response.resume(),void reject(error);response.setEncoding("utf8");let rawData="";response.on("data",(chunk=>rawData+=chunk)),response.on("end",(()=>{try{resolve(JSON.parse(rawData))}catch(error){reject(error)}}))})).on("error",(error=>reject(error)))}))}
 /**
    * Get API arguments.
    * This is internal method.

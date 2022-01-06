@@ -2,16 +2,16 @@
  * @module API
  */
 
-import processOptions from './options';
-
 import http from 'http';
 import https from 'https';
 
 import { version, } from '../package.json';
-import Search from './search';
+
 import Book from './book';
-import Tag from './tag';
 import Image from './image';
+import processOptions from './options';
+import Search from './search';
+import Tag from './tag';
 
 /**
  * API arguments
