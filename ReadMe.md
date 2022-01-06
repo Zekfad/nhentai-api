@@ -63,6 +63,11 @@ api.getBook(177013).then(book => {
 });
 ```
 
+#### Get random book
+```js
+await api.getRandomBook(); // Book instance
+````
+
 #### Search for the books
 
 ```js
