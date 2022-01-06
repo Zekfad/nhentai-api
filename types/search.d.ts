@@ -5,7 +5,7 @@ export type APISearch = {
     /**
      * Search results.
      */
-    result: any[];
+    result: APIBook[];
     /**
      * Number of search pages available.
      */

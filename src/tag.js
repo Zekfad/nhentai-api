@@ -62,6 +62,14 @@ class TagType {
 	get isKnown() {
 		return !(this instanceof UnknownTagType);
 	}
+
+	/**
+	 * Tag type name.
+	 * @returns {string}
+	 */
+	toString() {
+		return this.type;
+	}
 }
 
 /**
@@ -115,7 +123,9 @@ class Tag {
 			let known;
 			if ('string' === typeof type)
 				type = type.toLowerCase();
-			return ((known = this.known[type])) ? known : new UnknownTagType(type);
+			return ((known = this.known[type]))
+				? known
+				: new UnknownTagType(type);
 		},
 	};
 
@@ -227,6 +237,17 @@ class Tag {
 				? accum * current
 				: accum + current
 		);
+	}
+
+	/**
+	 * Get tag name or tag name with count of tagged books.
+	 * @param {?boolean} [includeCount=false] Include count.
+	 * @returns {string}
+	 */
+	toString(includeCount = false) {
+		return this.name + (includeCount
+			? ` (${this.count})`
+			: '');
 	}
 }
 

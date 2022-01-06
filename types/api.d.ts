@@ -83,6 +83,16 @@ declare class API {
      */
     search(query: string, page?: number | null, sort?: SearchSortMode | null): Promise<Search>;
     /**
+     * Search by query.
+     * @param {string}          query     Query.
+     * @param {?number}         [page=1]  Starting page ID.
+     * @param {?SearchSortMode} [sort=''] Search sort mode.
+     * @yields {Search} Search instance.
+     * @async
+     * @returns {AsyncGenerator<Search, Search, Search>}
+     */
+    searchGenerator(query: string, page?: number | null, sort?: SearchSortMode | null): AsyncGenerator<Search, Search, Search>;
+    /**
      * Search related books.
      * @param {number|Book} book Book instance or Book ID.
      * @returns {Promise<Search>} Search instance.

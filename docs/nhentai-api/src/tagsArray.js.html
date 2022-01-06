@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>{ <i>webdoc</i> }: index.js</title>
+    <title>{ <i>webdoc</i> }: tagsArray.js</title>
 
     
 
@@ -158,72 +158,32 @@
             <a href="#26">26</a>
           </li>
         
-          <li id="27">
-            <a href="#27">27</a>
-          </li>
-        
-          <li id="28">
-            <a href="#28">28</a>
-          </li>
-        
-          <li id="29">
-            <a href="#29">29</a>
-          </li>
-        
-          <li id="30">
-            <a href="#30">30</a>
-          </li>
-        
-          <li id="31">
-            <a href="#31">31</a>
-          </li>
-        
-          <li id="32">
-            <a href="#32">32</a>
-          </li>
-        
-          <li id="33">
-            <a href="#33">33</a>
-          </li>
-        
-          <li id="34">
-            <a href="#34">34</a>
-          </li>
-        
       </ul>
-      <pre><code><span class="hljs-keyword">import</span> API <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./api&#x27;</span>;
-<span class="hljs-keyword">import</span> Book <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./book&#x27;</span>;
-<span class="hljs-keyword">import</span> Image <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./image&#x27;</span>;
-<span class="hljs-keyword">import</span> { <span class="hljs-keyword">Search</span>, SearchSort, } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./search&#x27;</span>;
+      <pre><code><span class="hljs-comment">// eslint-disable-next-line no-unused-vars</span>
 <span class="hljs-keyword">import</span> { Tag, } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./tag&#x27;</span>;
 
 
-export {
-	API,
-	<span class="hljs-keyword">Search</span>,
-	SearchSort,
-	Book,
-	Image,
-	Tag,
-};
-
 <span class="hljs-comment">/**
- * @typedef { import(&quot;./tag&quot;).TagTypes } TagTypes
+ * Array of Tags with helper methods.
+ * <span class="hljs-doctag">@class</span>
+ * <span class="hljs-doctag">@extends </span>Array&lt;Tag&gt;
  */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TagsArray</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Array</span> </span>{
+	<span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">...args</span>)</span> {
+		<span class="hljs-built_in">super</span>(...args);
+	}
 
-<span class="hljs-comment">/**
- * @type {TagTypes}
- */</span>
-export const TagTypes = {
-	<span class="hljs-type">Unknown</span>  : Tag.<span class="hljs-keyword">types</span>.Unknown,
-	Tag      : Tag.<span class="hljs-keyword">types</span>.Tag,
-	Category : Tag.<span class="hljs-keyword">types</span>.Category,
-	Artist   : Tag.<span class="hljs-keyword">types</span>.Artist,
-	Parody   : Tag.<span class="hljs-keyword">types</span>.Parody,
-	<span class="hljs-type">Character</span>: Tag.<span class="hljs-keyword">types</span>.Character,
-	<span class="hljs-keyword">Group</span>    : Tag.<span class="hljs-keyword">types</span>.<span class="hljs-keyword">Group</span>,
-	<span class="hljs-keyword">Language</span> : Tag.<span class="hljs-keyword">types</span>.<span class="hljs-keyword">Language</span>,
-};
+	<span class="hljs-comment">/**
+	 * Get array of tags names.
+	 * <span class="hljs-doctag">@param <span class="hljs-type">{?boolean}</span> </span>[includeCount=false] Include count.
+	 * <span class="hljs-doctag">@returns <span class="hljs-type">{String[]}</span></span>
+	 */</span>
+	<span class="hljs-function"><span class="hljs-title">toNames</span>(<span class="hljs-params">includeCount = <span class="hljs-literal">false</span></span>)</span> {
+		<span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.from(<span class="hljs-built_in">this</span>, <span class="hljs-function"><span class="hljs-params">tag</span> =&gt;</span> tag.toString(includeCount));
+	}
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> TagsArray;
 </code></pre>
     </div>
   </div>

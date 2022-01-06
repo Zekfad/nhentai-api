@@ -38,15 +38,15 @@ export type APIBook = {
     /**
      * Book cover image.
      */
-    cover: any;
+    cover: APIImage;
     /**
      * Book pages' images.
      */
-    images: any[];
+    images: APIImage[];
     /**
      * Book tags.
      */
-    tags: any[];
+    tags: APITag[];
 };
 /**
  * Book title.
@@ -116,16 +116,16 @@ declare class Book {
     static parse(book: APIBook): Book;
     /**
      * Create book.
-     * @param {object}    [params]              Book parameters.
-     * @param {BookTitle} [params.title]        Book title.
-     * @param {number}    [params.id=0]         Book ID.
-     * @param {number}    [params.media=0]      Book Media ID.
-     * @param {number}    [params.favorites=0]  Book favours count.
-     * @param {string}    [params.scanlator=''] Book scanlator.
-     * @param {Date}      [params.uploaded]     Book upload date.
-     * @param {Tag[]}     [params.tags=[]]      Book tags.
-     * @param {Image}     [params.cover]        Book cover.
-     * @param {Image[]}   [params.pages=[]]     Book pages.
+     * @param {object}          [params]              Book parameters.
+     * @param {BookTitle}       [params.title]        Book title.
+     * @param {number}          [params.id=0]         Book ID.
+     * @param {number}          [params.media=0]      Book Media ID.
+     * @param {number}          [params.favorites=0]  Book favours count.
+     * @param {string}          [params.scanlator=''] Book scanlator.
+     * @param {Date}            [params.uploaded]     Book upload date.
+     * @param {Tag[]|TagsArray} [params.tags=[]]      Book tags.
+     * @param {Image}           [params.cover]        Book cover.
+     * @param {Image[]}         [params.pages=[]]     Book pages.
      */
     constructor({ title, id, media, favorites, scanlator, uploaded, tags, cover, pages, }?: {
         title?: BookTitle;
@@ -134,7 +134,7 @@ declare class Book {
         favorites?: number;
         scanlator?: string;
         uploaded?: Date;
-        tags?: Tag[];
+        tags?: Tag[] | TagsArray;
         cover?: Image;
         pages?: Image[];
     });
@@ -175,10 +175,10 @@ declare class Book {
     uploaded: Date;
     /**
      * Book tags.
-     * @type {Tag[]}
+     * @type {TagsArray}
      * @default []
      */
-    tags: Tag[];
+    tags: TagsArray;
     /**
      * Book cover.
      * @type {Image}
@@ -230,11 +230,48 @@ declare class Book {
     /**
      * Get any tags with certain properties.
      * @param {object|Tag} tag Tag.
+     * @returns {TagsArray}
      */
-    getTagsWith(tag: object | Tag): Tag[];
+    getTagsWith(tag: object | Tag): TagsArray;
+    /**
+     * Pure tags (with type {TagType.Tag}).
+     * @type {Tag[]}
+     */
+    get pureTags(): Tag[];
+    /**
+     * Category tags.
+     * @type {Tag[]}
+     */
+    get categories(): Tag[];
+    /**
+     * Artist tags.
+     * @type {Tag[]}
+     */
+    get artists(): Tag[];
+    /**
+     * Parody tags.
+     * @type {Tag[]}
+     */
+    get parodies(): Tag[];
+    /**
+     * Character tags.
+     * @type {Tag[]}
+     */
+    get characters(): Tag[];
+    /**
+     * Group tags.
+     * @type {Tag[]}
+     */
+    get groups(): Tag[];
+    /**
+     * Language tags.
+     * @type {Tag[]}
+     */
+    get languages(): Tag[];
 }
-import { Tag } from "./tag";
+import TagsArray from "./tagsArray";
 import Image from "./image";
+import { Tag } from "./tag";
 /**
  * Class representing unknown book.
  * @class

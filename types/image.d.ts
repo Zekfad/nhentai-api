@@ -20,15 +20,15 @@ export type ImageTypes = {
     /**
      * JPEG image type.
      */
-    JPEG: any;
+    JPEG: TagType;
     /**
      * PNG image type.
      */
-    PNG: any;
+    PNG: TagType;
     /**
      * GIF image type.
      */
-    GIF: any;
+    GIF: TagType;
 };
 /**
  * Class representing image.

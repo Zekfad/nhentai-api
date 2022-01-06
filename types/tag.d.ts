@@ -130,6 +130,12 @@ export class Tag {
      * @returns {boolean} Whatever tags are equal.
      */
     compare(tag: string | Tag, strict?: boolean | string): boolean;
+    /**
+     * Get tag name or tag name with count of tagged books.
+     * @param {?boolean} [includeCount=false] Include count.
+     * @returns {string}
+     */
+    toString(includeCount?: boolean | null): string;
 }
 /**
  * @module Tag
@@ -182,6 +188,11 @@ export class TagType {
      * @type {boolean}
      */
     get isKnown(): boolean;
+    /**
+     * Tag type name.
+     * @returns {string}
+     */
+    toString(): string;
 }
 /**
  * Class representing unknown tag type.

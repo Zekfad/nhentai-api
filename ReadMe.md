@@ -103,10 +103,117 @@ In case you need to change API implementation (e.g. change proxy) you can pass `
 search.getNextPage(api);
 ```
 
-#### Filter tags
+You can also use async generator:
+```js
+// Get first 2 pages
+for await (const search of api.searchGenerator('test')) {
+	console.log(search);
+	if (search.page >= 2)
+		break;
+}
+```
+
+#### Working with tags
+
+`book.tags` has type of `TagsArray`, it is just an `Array<Tag>` with helper methods.
 
 ```js
+const tag = book.tags[0]; // Tag
+```
+
+##### Get tag id
+```js
+tag.id;
+```
+
+##### Get tag name (without count)
+```js
+tag.name;
+// or
+tag.toString();
+```
+
+##### Get tag name (with count)
+```js
+tag.toString(true);
+```
+
+##### Get tag type (as string)
+```js
+tag.type.type;
+// or
+tag.type.toString();
+```
+
+##### Pre-filtered tags
+
+```js
+book.pureTags;   // pure tags (with type 'tag')
+book.categories; // category tags
+book.artists;    // artist tags
+book.parodies;   // parody tags
+book.characters; // character tags
+book.groups;     // group tags
+book.languages;  // language tags
+```
+
+##### Filter tags
+
+Get artists:
+```js
+book.artists;
+// or
 book.getTagsWith({
-	type: TagTypes.Artist, // you may also use Tag.types.get('artist') or Tag.types.Artist
-}) // Array<Tag>
+	type: TagTypes.Artist, // you may also use Tag.types.Artist or Tag.types.get('artist') 
+}); // TagsArray (subclass of Array<Tag>)
+// or
+book.getTagsWith({ type: 'artist', }); // TagsArray (subclass of Array<Tag>)
+```
+
+Get tag with name `english`:
+```js
+book.getTagsWith({ name: 'english', }); // TagsArray (subclass of Array<Tag>)
+```
+
+Get categories
+```js
+book.categories;
+// or
+book.getTagsWith({ type: TagTypes.Category, }); // Recommended
+// or
+book.getTagsWith({ type: Tag.types.Category, });
+// or
+book.getTagsWith({ type: Tag.types.get('category'), });
+// or
+book.getTagsWith({ type: 'category', });
+```
+
+##### Get tags comma separated
+
+Without counts:
+```js
+book.tags.toNames().join(', ');
+// or
+book.tags.join(', ');
+```
+
+With counts:
+```js
+book.tags.toNames(true).join(', ');
+// or
+book.tags.map(tag => tag.toString(true)).join(', ')
+```
+
+Get all artists:
+```js
+// With counts
+book.artists.toNames(true).join(', ');
+// or
+book.getTagsWith({ type: TagTypes.Artist, }).toNames(true).join(', ');
+// Without counts
+book.artists.join(', ');
+// or
+book.artists.toNames().join(', ');
+// or
+book.getTagsWith({ type: TagTypes.Artist, }).join(', ');
 ```

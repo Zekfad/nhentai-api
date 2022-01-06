@@ -271,6 +271,24 @@ class API {
 	}
 
 	/**
+	 * Search by query.
+	 * @param {string}          query     Query.
+	 * @param {?number}         [page=1]  Starting page ID.
+	 * @param {?SearchSortMode} [sort=''] Search sort mode.
+	 * @yields {Search} Search instance.
+	 * @async
+	 * @returns {AsyncGenerator<Search, Search, Search>}
+	 */
+	async * searchGenerator(query, page = 1, sort = '') {
+		let search = await this.search(query, page, sort);
+
+		while (search.page <= search.pages) {
+			yield search;
+			search = await this.search(query, search.page + 1, sort);
+		}
+	}
+
+	/**
 	 * Search related books.
 	 * @param {number|Book} book Book instance or Book ID.
 	 * @returns {Promise<Search>} Search instance.

@@ -10,7 +10,7 @@
 	},
 	"module": "./dist/esm/bundle.js",
 	"name": "nhentai-api",
-	"version": "3.2.1",
+	"version": "3.3.0",
 	"description": "nHentai Node.JS API client.",
 	"keywords": [
 		"r18",
@@ -32,33 +32,36 @@
 		"dev": "rollup -c --watch --environment mode:dev",
 		"build": "run-p build:**",
 		"build:src": "rollup -c",
-		"build:docs": "webdoc --config .webdocrc.json --site-root / --verbose",
+		"build:docs": "webdoc --config .webdocrc.json --site-root /nhentai-api --verbose",
 		"build:def": "tsc",
 		"test": "nyc --reporter=lcov mocha",
 		"coverage": "codecov"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.15.5",
-		"@babel/eslint-parser": "^7.15.7",
-		"@babel/plugin-proposal-class-properties": "^7.14.5",
+		"@babel/core": "^7.16.7",
+		"@babel/eslint-parser": "^7.16.5",
+		"@babel/plugin-proposal-class-properties": "^7.16.7",
 		"@rollup/plugin-babel": "^5.3.0",
-		"@rollup/plugin-commonjs": "^21.0.0",
+		"@rollup/plugin-commonjs": "^21.0.1",
 		"@rollup/plugin-json": "^4.0.2",
-		"@rollup/plugin-node-resolve": "^13.0.5",
+		"@rollup/plugin-node-resolve": "^13.1.3",
 		"@webdoc/cli": "^1.5.5",
 		"@zekfad/eslint-config": "^1.0.2",
 		"codecov": "^3.8.3",
-		"eslint": "^7.32.0",
-		"eslint-plugin-import": "^2.24.2",
+		"eslint": "^8.6.0",
+		"eslint-plugin-import": "^2.25.4",
 		"magic-string": "^0.25.7",
-		"mocha": "^9.1.2",
+		"mocha": "^9.1.3",
 		"npm-run-all": "^4.1.5",
 		"nyc": "^15.1.0",
-		"rollup": "^2.58.0",
+		"rollup": "^2.63.0",
 		"rollup-plugin-terser": "^7.0.2",
-		"typescript": "^4.4.3"
+		"typescript": "^4.5.4"
 	},
 	"engines": {
 		"node": ">=10"
+	},
+	"resolutions": {
+		"**/source-map-resolve": "^0.6.0"
 	}
 }

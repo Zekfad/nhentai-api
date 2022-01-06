@@ -7,6 +7,9 @@
 		"plugins/markdown"
 	],
 	"opts": {
+		"encoding": "utf8",
+		"recurse": true,
+		"lenient": true,
 		"destination": "docs"
 	},
 	"template": {

@@ -4,6 +4,9 @@
 
 import Image from './image';
 import { Tag, } from './tag';
+import TagsArray from './tagsArray';
+
+import { TagTypes, } from '.';
 
 
 /**
@@ -66,7 +69,7 @@ class Book {
 			favorites: +book.num_favorites,
 			scanlator: book.scanlator,
 			uploaded : new Date(+book.upload_date * 1000),
-			tags     : book.tags.map(tag => new Tag(tag)),
+			tags     : TagsArray.from(book.tags, tag => Tag.get(tag)),
 			cover    : Image.parse(book.images.cover),
 			pages    : book.images.pages.map(
 				(image, id) => Image.parse(image, ++id)
@@ -121,10 +124,10 @@ class Book {
 
 	/**
 	 * Book tags.
-	 * @type {Tag[]}
+	 * @type {TagsArray}
 	 * @default []
 	 */
-	tags = [];
+	tags = new TagsArray();
 
 	/**
 	 * Book cover.
@@ -141,16 +144,16 @@ class Book {
 
 	/**
 	 * Create book.
-	 * @param {object}    [params]              Book parameters.
-	 * @param {BookTitle} [params.title]        Book title.
-	 * @param {number}    [params.id=0]         Book ID.
-	 * @param {number}    [params.media=0]      Book Media ID.
-	 * @param {number}    [params.favorites=0]  Book favours count.
-	 * @param {string}    [params.scanlator=''] Book scanlator.
-	 * @param {Date}      [params.uploaded]     Book upload date.
-	 * @param {Tag[]}     [params.tags=[]]      Book tags.
-	 * @param {Image}     [params.cover]        Book cover.
-	 * @param {Image[]}   [params.pages=[]]     Book pages.
+	 * @param {object}          [params]              Book parameters.
+	 * @param {BookTitle}       [params.title]        Book title.
+	 * @param {number}          [params.id=0]         Book ID.
+	 * @param {number}          [params.media=0]      Book Media ID.
+	 * @param {number}          [params.favorites=0]  Book favours count.
+	 * @param {string}          [params.scanlator=''] Book scanlator.
+	 * @param {Date}            [params.uploaded]     Book upload date.
+	 * @param {Tag[]|TagsArray} [params.tags=[]]      Book tags.
+	 * @param {Image}           [params.cover]        Book cover.
+	 * @param {Image[]}         [params.pages=[]]     Book pages.
 	 */
 	constructor({
 		title     = {
@@ -163,7 +166,7 @@ class Book {
 		favorites = 0,
 		scanlator = '',
 		uploaded  = new Date(0),
-		tags      = [],
+		tags      = new TagsArray(),
 		cover     = new Image({ id: 0, book: this, }),
 		pages     = [],
 	} = {}) {
@@ -261,11 +264,68 @@ class Book {
 	/**
 	 * Get any tags with certain properties.
 	 * @param {object|Tag} tag Tag.
+	 * @returns {TagsArray}
 	 */
 	getTagsWith(tag) {
 		tag = Tag.get(tag);
 
 		return this.tags.filter(elem => elem.compare(tag, 'any'));
+	}
+
+	/**
+	 * Pure tags (with type {TagType.Tag}).
+	 * @type {Tag[]}
+	 */
+	get pureTags() {
+		return this.getTagsWith({ type: TagTypes.Tag, });
+	}
+
+	/**
+	 * Category tags.
+	 * @type {Tag[]}
+	 */
+	get categories() {
+		return this.getTagsWith({ type: TagTypes.Category, });
+	}
+
+	/**
+	 * Artist tags.
+	 * @type {Tag[]}
+	 */
+	get artists() {
+		return this.getTagsWith({ type: TagTypes.Artist, });
+	}
+
+	/**
+	 * Parody tags.
+	 * @type {Tag[]}
+	 */
+	get parodies() {
+		return this.getTagsWith({ type: TagTypes.Parody, });
+	}
+
+	/**
+	 * Character tags.
+	 * @type {Tag[]}
+	 */
+	get characters() {
+		return this.getTagsWith({ type: TagTypes.Character, });
+	}
+
+	/**
+	 * Group tags.
+	 * @type {Tag[]}
+	 */
+	get groups() {
+		return this.getTagsWith({ type: TagTypes.Group, });
+	}
+
+	/**
+	 * Language tags.
+	 * @type {Tag[]}
+	 */
+	get languages() {
+		return this.getTagsWith({ type: TagTypes.Language, });
 	}
 }
 
