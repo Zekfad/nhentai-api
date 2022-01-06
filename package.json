@@ -59,7 +59,7 @@
 		"typescript": "^4.5.4"
 	},
 	"engines": {
-		"node": ">=10"
+		"node": ">=12"
 	},
 	"resolutions": {
 		"**/source-map-resolve": "^0.6.0"
