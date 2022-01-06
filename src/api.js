@@ -368,8 +368,7 @@ class API {
 	}
 
 	/**
-	 * Get book by id.
-	 * @param {number} bookID Book ID.
+	 * Get random book.
 	 * @returns {Promise<Book>} Book instance.
 	 * @async
 	 */

@@ -116,8 +116,7 @@ declare class API {
      */
     getBook(bookID: number): Promise<Book>;
     /**
-     * Get book by id.
-     * @param {number} bookID Book ID.
+     * Get random book.
      * @returns {Promise<Book>} Book instance.
      * @async
      */
