@@ -32,7 +32,7 @@ declare class API {
      * Applies provided options on top of defaults.
      * @param {nHentaiOptions?} options Options to apply.
      */
-    constructor(options: nHentaiOptions | null);
+    constructor(options?: nHentaiOptions);
     /**
      * Hosts
      * @type {?nHentaiHosts}
