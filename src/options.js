@@ -28,7 +28,7 @@ import { Agent as SSLAgent, } from 'https';
 
 /**
  * Applies provided options on top of defaults.
- * @param {?nHentaiOptions} options Options to apply.
+ * @param {?nHentaiOptions} [options={}] Options to apply.
  * @returns {nHentaiOptions} Unified options.
  */
 function processOptions({

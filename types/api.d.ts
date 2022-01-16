@@ -30,9 +30,9 @@ declare class API {
     private static APIPath;
     /**
      * Applies provided options on top of defaults.
-     * @param {nHentaiOptions?} options Options to apply.
+     * @param {?nHentaiOptions} [options={}] Options to apply.
      */
-    constructor(options: nHentaiOptions | null);
+    constructor(options?: nHentaiOptions | null);
     /**
      * Hosts
      * @type {?nHentaiHosts}

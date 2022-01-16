@@ -158,9 +158,9 @@ class API {
 
 	/**
 	 * Applies provided options on top of defaults.
-	 * @param {nHentaiOptions?} options Options to apply.
+	 * @param {?nHentaiOptions} [options={}] Options to apply.
 	 */
-	constructor(options) {
+	constructor(options = {}) {
 		let params = processOptions(options);
 
 		Object.assign(this, params);
